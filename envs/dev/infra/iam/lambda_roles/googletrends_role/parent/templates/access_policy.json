@@ -1,0 +1,73 @@
+{
+    "Statement": [
+        {
+            "Action": [
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DescribeInstances",
+                "ec2:AttachNetworkInterface"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Sid": "LambdaBasicExecution"
+        },
+        {
+            "Action": [
+                "lambda:InvokeFunction",
+                "lambda:InvokeAsync"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:lambda:us-east-1:287882505924:function:dev-krny-google-trends-child-tf",
+            "Sid": "VisualEditor0"
+        },
+        {
+            "Action": [
+                "glue:StartJobRun",
+                "glue:GetJob",
+                "glue:GetJobRun"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:glue:us-east-1:287882505924:job/dev_krny_trnsf_google_tf",
+            "Sid": "GlueJobPolicy"
+        },
+        {
+            "Action": [
+                "dynamodb:BatchGet*",
+                "dynamodb:DescribeTable",
+                "dynamodb:Get*",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:BatchWrite*",
+                "dynamodb:CreateTable",
+                "dynamodb:Delete*",
+                "dynamodb:Update*",
+                "dynamodb:PutItem"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:dynamodb:us-east-1:287882505924:table/dev_krny_google_trends"
+            ]
+        },
+        {
+            "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:ListSecrets",
+                "kms:*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ],
+    "Version": "2012-10-17"
+}

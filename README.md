@@ -1,1 +1,3 @@
-# krny-xebia
+# sensing-solution-platform
+sensing-solution-platform
+

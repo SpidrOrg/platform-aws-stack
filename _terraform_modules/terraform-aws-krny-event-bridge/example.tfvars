@@ -1,0 +1,5 @@
+lambda_function_name        = "test"
+lambda_function_arn         = "arn:aws:lambda:us-east-1:287882505924:function:test"
+event_rule_name             = "my_event_rule"
+event_rule_description      = "A rule to trigger my lambda function on a schedule"
+schedule_expression         = "rate(1 day)"

@@ -1,0 +1,556 @@
+{
+  "vars": [
+    {
+      "section": "Provider Configuration",
+      "sectionDec": "Configuring Providers",
+      "expand": true,
+      "type": "input_block",
+      "id": "Provider Configuration",
+      "fields": [
+        {
+          "component": "input",
+          "label": "Region",
+          "type": "text",
+          "defaultValue": "",
+          "id": "region",
+          "hint": "Provide region name",
+          "store": "region",
+          "required": true
+        },
+        {
+          "component": "input",
+          "label": "Replication Region",
+          "type": "text",
+          "defaultValue": "",
+          "id": "replication_region",
+          "hint": "Provide region name where we need to replicate",
+          "store": "replication_region",
+          "required": true
+        },
+        {
+          "component": "input",
+          "label": "Assume Role ARN",
+          "type": "text",
+          "defaultValue": "",
+          "id": "assume_role_arn",
+          "hint": "Assume role in which account to create",
+          "store": "assume_role_arn",
+          "required": false
+        },
+        {
+          "component": "object_group",
+          "label": "Extra Tags",
+          "type": "text",
+          "defaultValue": {},
+          "id": "extra_tags",
+          "hint": "Add extra tags to your resource",
+          "store": "extra_tags",
+          "required": false,
+          "fields": {
+            "key": {
+              "component": "input",
+              "label": "Key",
+              "type": "text",
+              "defaultValue": "",
+              "id": "extra_key",
+              "hint": "add key here",
+              "store": "key"
+            },
+            "value": {
+              "component": "input",
+              "label": "Value",
+              "type": "text",
+              "defaultValue": "",
+              "id": "extra_value",
+              "hint": "add value here",
+              "store": "value"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "section": "S3 Configuration",
+      "sectionDec": "Configuring S3",
+      "expand": true,
+      "type": "input_block",
+      "id": "S3 Configuration",
+      "fields": [
+        {
+          "component": "input",
+          "label": "Bucket Name",
+          "type": "text",
+          "defaultValue": "",
+          "id": "bucket_name",
+          "hint": "Provide S3-bucket name",
+          "store": "bucket_name",
+          "required": true
+        },
+        {
+          "component": "toggle",
+          "label": "Force Destroy",
+          "type": "button",
+          "defaultValue": true,
+          "id": "force_destroy",
+          "hint": "A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable",
+          "store": "force_destroy",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        },
+        {
+          "component": "toggle",
+          "label": "Attach Policy",
+          "type": "button",
+          "defaultValue": true,
+          "id": "attach_policy",
+          "hint": "Controls if S3 bucket should have bucket policy attached (set to `true` to use value of `policy` as bucket policy)",
+          "store": "attach_policy",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        },
+        {
+          "component": "toggle",
+          "label": "Deny Insecure",
+          "type": "button",
+          "defaultValue": true,
+          "id": "deny_insecure",
+          "hint": "Controls if S3 bucket should have deny non-SSL transport policy attached",
+          "store": "deny_insecure",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        },
+        {
+          "component": "toggle",
+          "label": "Object Lock",
+          "type": "button",
+          "defaultValue": false,
+          "id": "object_lock",
+          "hint": "If you want to enable object lock, by default its disabled",
+          "store": "object_lock",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "Tags",
+      "sectionDec": "Adding Tags",
+      "expand": true,
+      "type": "input_block",
+      "id": "Tags",
+      "fields": [
+        {
+          "component": "input",
+          "label": "Project",
+          "type": "text",
+          "defaultValue": "",
+          "id": "project",
+          "hint": "Name of the project for which S3 is provisioned",
+          "store": "project",
+          "required": true
+        },
+        {
+          "component": "input",
+          "label": "Environment Class",
+          "type": "text",
+          "defaultValue": "",
+          "id": "environment_class",
+          "hint": "Environment of the bucket (e.g dev, uat, prod)",
+          "store": "environment_class",
+          "required": true
+        }
+      ]
+    },
+    {
+      "section": "Encryption",
+      "sectionDec": "Configuring Encryption",
+      "expand": true,
+      "type": "input_block",
+      "id": "Encryption",
+      "fields": [
+        {
+          "component": "input",
+          "label": "KMS Key ARN",
+          "type": "text",
+          "defaultValue": "",
+          "id": "kms_key_arn",
+          "hint": "Enter AWS KMS key arn for server side encryption",
+          "store": "kms_key_arn",
+          "required": true
+        }
+      ]
+    },
+    {
+      "section": "Versioning",
+      "sectionDec": "Configuring Versioning",
+      "expand": true,
+      "type": "input_block",
+      "id": "Versioning",
+      "fields": [
+        {
+          "component": "toggle",
+          "label": "Versioning",
+          "type": "button",
+          "defaultValue": true,
+          "id": "versioning",
+          "hint": "Provide input to Enable versioning True / false",
+          "store": "versioning",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "Lifecycle Rules",
+      "sectionDec": "Configuring Lifecycle Rules",
+      "expand": true,
+      "type": "input_block",
+      "id": "Lifecycle Rules",
+      "fields": [
+        {
+          "component": "toggle",
+          "label": "Lifecycle Rule Enabled",
+          "type": "button",
+          "defaultValue": false,
+          "id": "lifecycle_rule_enabled",
+          "hint": "If you need to enable lifecycle rule set 'true', default its false",
+          "store": "lifecycle_rule_enabled",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        },
+        {
+          "component": "input",
+          "label": "Lifecycle Rule Prefix",
+          "type": "text",
+          "defaultValue": "log",
+          "id": "lifecycle_rule_prefix",
+          "hint": "Enter lifecycle rule prefix",
+          "store": "lifecycle_rule_prefix",
+          "required": false
+        },
+        {
+          "component": "rawInput",
+          "label": "Current Transition",
+          "type": "text",
+          "defaultValue": [
+            {
+              "days": 30,
+              "storage_class": "ONEZONE_IA"
+            },
+            {
+              "days": 60,
+              "storage_class": "GLACIER"
+            }
+          ],
+          "id": "current_transition",
+          "hint": "Specify the current transition",
+          "store": "current_transition",
+          "required": false
+        },
+        {
+          "component": "input",
+          "label": "Expiration Days",
+          "type": "number",
+          "defaultValue": 30,
+          "id": "expiration_days",
+          "hint": "Enter the expiration days for current transition",
+          "store": "expiration_days",
+          "required": false
+        },
+        {
+          "component": "rawInput",
+          "label": "Noncurrent Version Transition",
+          "type": "text",
+          "defaultValue": [
+            {
+              "days": 30,
+              "storage_class": "STANDARD_IA"
+            },
+            {
+              "days": 60,
+              "storage_class": "ONEZONE_IA"
+            },
+            {
+              "days": 90,
+              "storage_class": "GLACIER"
+            }
+          ],
+          "id": "noncurrent_version_transition",
+          "hint": "Specify the non-current version transition",
+          "store": "noncurrent_version_transition",
+          "required": false
+        },
+        {
+          "component": "input",
+          "label": "Noncurrent Version Expiration Days",
+          "type": "number",
+          "defaultValue": 30,
+          "id": "noncurrent_version_expiration_days",
+          "hint": "Enter the noncurrent version expiration days",
+          "store": "noncurrent_version_expiration_days",
+          "required": false
+        },
+        {
+          "component": "input",
+          "label": "Abort Incomplete Multipart Upload Days",
+          "type": "number",
+          "defaultValue": 7,
+          "id": "abort_incomplete_multipart_upload_days",
+          "hint": "Number of days to abort incomplete multipart upload",
+          "store": "abort_incomplete_multipart_upload_days",
+          "required": false
+        }
+      ]
+    },
+    {
+      "section": "Log Bucket",
+      "sectionDec": "Configuring Log Bucket",
+      "expand": true,
+      "type": "input_block",
+      "id": "Log Bucket",
+      "fields": [
+        {
+          "component": "toggle",
+          "label": "Log Bucket",
+          "type": "button",
+          "defaultValue": false,
+          "id": "log_bucket",
+          "hint": "If you want log bucket put as true",
+          "store": "log_bucket",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "Access Control",
+      "sectionDec": "Configuring Access Control",
+      "expand": true,
+      "type": "input_block",
+      "id": "Access Control",
+      "fields": [
+        {
+          "component": "toggle",
+          "label": "Block Public ACLs",
+          "type": "button",
+          "defaultValue": true,
+          "id": "block_public_acls",
+          "hint": "Whether Amazon S3 should block public ACLs for this bucket.",
+          "store": "block_public_acls",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        },
+        {
+          "component": "toggle",
+          "label": "Block Public Policy",
+          "type": "button",
+          "defaultValue": true,
+          "id": "block_public_policy",
+          "hint": "Whether Amazon S3 should block public bucket policies for this bucket.",
+          "store": "block_public_policy",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        },
+        {
+          "component": "toggle",
+          "label": "Ignore Public ACLs",
+          "type": "button",
+          "defaultValue": true,
+          "id": "ignore_public_acls",
+          "hint": "Whether Amazon S3 should ignore public ACLs for this bucket.",
+          "store": "ignore_public_acls",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        },
+        {
+          "component": "toggle",
+          "label": "Restrict Public Buckets",
+          "type": "button",
+          "defaultValue": true,
+          "id": "restrict_public_buckets",
+          "hint": "Whether Amazon S3 should restrict public bucket policies for this bucket.",
+          "store": "restrict_public_buckets",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "VPC Endpoint",
+      "sectionDec": "Configuring VPC Endpoint",
+      "expand": true,
+      "type": "input_block",
+      "id": "VPC Endpoint",
+      "fields": [
+        {
+          "component": "toggle",
+          "label": "VPC Endpoint",
+          "type": "button",
+          "defaultValue": false,
+          "id": "vpc_endpoint",
+          "hint": "Set to true if want to create a S3 VPC endpoint",
+          "store": "vpc_endpoint",
+          "required": false,
+          "options": [
+            {
+              "label": "False",
+              "value": false
+            },
+            {
+              "label": "True",
+              "value": true
+            }
+          ]
+        },
+        {
+          "component": "input",
+          "label": "VPC ID",
+          "type": "text",
+          "defaultValue": "",
+          "id": "vpc_id",
+          "hint": "Provide vpc_id",
+          "store": "vpc_id",
+          "required": false
+        },
+        {
+          "component": "input",
+          "label": "VPC Endpoint Name",
+          "type": "text",
+          "defaultValue": "",
+          "id": "vpc_endpoint_name",
+          "hint": "Name of the vpc_endpoint",
+          "store": "vpc_endpoint_name",
+          "required": false
+        },
+        {
+          "component": "input",
+          "label": "Route Table ID",
+          "type": "text",
+          "defaultValue": "",
+          "id": "route_table_id",
+          "hint": "Provide Private route_table_id",
+          "store": "route_table_id",
+          "required": false
+        }
+      ]
+    },
+    {
+      "section": "Metrics",
+      "sectionDec": "Configuring Metrics",
+      "expand": true,
+      "type": "input_block",
+      "id": "Metrics",
+      "fields": [
+        {
+          "component": "rawInput",
+          "label": "Metrics",
+          "type": "text",
+          "defaultValue": [],
+          "id": "metrics",
+          "hint": "The s3 bucket metrics you want to create",
+          "store": "metrics",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

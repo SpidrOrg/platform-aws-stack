@@ -1,0 +1,21 @@
+version: 0.2
+env:
+  variables:
+    TERRASCAN_VERSION: "1.16.0"
+phases:
+    install:
+        commands:
+            - cd /usr/bin 
+            - curl -L -o terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz https://github.com/accurics/terrascan/releases/download/v${TERRASCAN_VERSION}/terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz
+            - tar -xf terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz terrascan
+    build:
+        commands:
+            - cd "$CODEBUILD_SRC_DIR"
+            - cd envs/uat
+            - aws sts get-caller-identity
+            - find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;
+            - codebuild-breakpoint
+            - terragrunt run-all init --terragrunt-parallelism 1
+            - terragrunt run-all validate --terragrunt-parallelism 1
+            - terrascan init
+            - terragrunt run-all plan --terragrunt-parallelism 1 
