@@ -70,7 +70,7 @@ dependency "security_group_id" {
 }
 
 dependency "job_name" {
-  config_path = "../../../glue/jobs/transformation_ihs//."
+  config_path = "../../../glue/jobs/transformation-ihs//."
   mock_outputs = {
     glue_job_name  = ["jobname"]
   }

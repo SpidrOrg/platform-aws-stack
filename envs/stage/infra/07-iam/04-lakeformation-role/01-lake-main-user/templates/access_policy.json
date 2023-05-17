@@ -1,0 +1,114 @@
+{
+	"Statement": [{
+			"Action": [
+				"ec2:DescribeNetworkInterfaces",
+				"ec2:CreateNetworkInterface",
+				"ec2:DeleteNetworkInterface",
+				"ec2:DescribeInstances",
+				"ec2:AttachNetworkInterface"
+			],
+			"Effect": "Allow",
+			"Resource": "*"
+		},
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ram:CreateResourceShare"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringLikeIfExists": {
+                    "ram:RequestedResourceType": [
+                        "glue:Table",
+                        "glue:Database",
+                        "glue:Catalog"
+                    ]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ram:UpdateResourceShare",
+                "ram:DeleteResourceShare",
+                "ram:AssociateResourceShare",
+                "ram:DisassociateResourceShare",
+                "ram:GetResourceShares"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringLike": {
+                    "ram:ResourceShareName": [
+                        "LakeFormation*"
+                    ]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "glue:PutResourcePolicy",
+                "glue:DeleteResourcePolicy",
+                "organizations:DescribeOrganization",
+                "organizations:DescribeAccount",
+                "ram:Get*",
+                "ram:List*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "organizations:ListRoots",
+                "organizations:ListAccountsForParent",
+                "organizations:ListOrganizationalUnitsForParent"
+            ],
+            "Resource": "*"
+        },
+		{
+            "Effect": "Allow",
+            "Action": [
+                "lakeformation:*",
+                "cloudtrail:DescribeTrails",
+                "cloudtrail:LookupEvents",
+                "glue:GetDatabase",
+                "glue:GetDatabases",
+                "glue:CreateDatabase",
+                "glue:UpdateDatabase",
+                "glue:DeleteDatabase",
+                "glue:GetConnections",
+                "glue:SearchTables",
+                "glue:GetTable",
+                "glue:CreateTable",
+                "glue:UpdateTable",
+                "glue:DeleteTable",
+                "glue:GetTableVersions",
+                "glue:GetPartitions",
+                "glue:GetTables",
+                "glue:GetWorkflow",
+                "glue:ListWorkflows",
+                "glue:BatchGetWorkflows",
+                "glue:DeleteWorkflow",
+                "glue:GetWorkflowRuns",
+                "glue:StartWorkflowRun",
+                "glue:GetWorkflow",
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketAcl",
+                "iam:ListUsers",
+                "iam:ListRoles",
+                "iam:GetRole",
+                "iam:GetRolePolicy",
+				"airflow:*"
+            ],
+            "Resource": "*"
+        }		
+	],
+	"Version": "2012-10-17"
+}

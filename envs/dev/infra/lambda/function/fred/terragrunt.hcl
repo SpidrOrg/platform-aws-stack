@@ -62,7 +62,7 @@ dependency "pvt_subnet" {
 }
 
 dependency "job_name" {
-  config_path = "../../../glue/jobs/transformation_fred//."
+  config_path = "../../../glue/jobs/transformation-fred//."
   mock_outputs = {
     glue_job_name  = ["jobname"]
   }

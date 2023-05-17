@@ -140,3 +140,6 @@ variable "data_folders_list" {
   default     = []
 }
 
+# variable "file_names" {
+#   type = list(string)
+# }

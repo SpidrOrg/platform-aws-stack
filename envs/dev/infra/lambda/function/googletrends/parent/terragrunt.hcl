@@ -63,7 +63,7 @@ dependency "child_arn" {
 }
 
 dependency "glue_job_name" {
-  config_path = "../../../../glue/jobs/transformation_google//."
+  config_path = "../../../../glue/jobs/transformation-google//."
   mock_outputs = {
     glue_job_name  = ["jobname"]
   }

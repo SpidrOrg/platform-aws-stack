@@ -1,49 +1,94 @@
-# include {
-#   path = find_in_parent_folders()
-# }
+include {
+  path = find_in_parent_folders()
+}
 
-# terraform {
-#   source = "../../../../../_terraform_modules/terraform-aws-krny-glue/glue_crawler//."
-# }
+terraform {
+  source = "../../../../../_terraform_modules/terraform-aws-krny-glue/glue_crawler//."
+}
 
-# locals {
-#   # Automatically load input variables
-#   common_vars = read_terragrunt_config(find_in_parent_folders("common_vars.hcl"))
-# }
+locals {
+  # Automatically load input variables
+  common_vars = read_terragrunt_config(find_in_parent_folders("common_vars.hcl"))
+}
 
-# dependency "glue_transformation_job_role" {
-#   config_path = "../../iam/glue-roles/glue_transformation_job_role"
-#   mock_outputs = {
-#     iam_role_arn = "iam-1234"
-#   }
-# }
+dependency "covid-glue-role" {
+  config_path = "../../iam/glue-roles/covid"
+  mock_outputs = {
+    iam_role_arn = "arn:aws:iam::123456789012:role/role_name"
+  }
+}
 
 
-# dependency "database_catalog_table" {
-#   config_path = "../database_catalog_and_ctlg_tables"
-#   mock_outputs = {
-#     database_name = "aws_athena_tf"
-#   }
-# }
+dependency "database_catalog_table" {
+  config_path = "../database_catalog_and_ctlg_tables"
+  mock_outputs = {
+    database_name = "aws_athena"
+  }
+}
 
-# inputs = merge(
-#   local.common_vars.inputs,
-#   {
-#     crawler = {
-#     name = "my-crawler"
-#     description = "Transformed data Glue Crawler"
-#     role_arn = dependency.glue_transformation_job_role.outputs.iam_role_arn  
-#     catalog_target_tables = [
-#         "tfd covid_tf",
-#         "tfd_ihs_tf",
-#         "tfd_google_trends_tf",
-#         "tfd_fred_tf",
-#         "tfd_meteostat_tf",
-#         "tfd_similar_web_tf"
-#                     ]
-# }
- 
-# database_name = dependency.database_catalog_table.outputs.database_name
+dependency "classifier-name-1" {
+  config_path = "../classifier"
+  mock_outputs = {
+    classifier_name_1 = "classifier-name-1"
+  }
+}
 
-#   }
-# )
+dependency "classifier-name-2" {
+  config_path = "../classifier"
+  mock_outputs = {
+    classifier_name_2 = "classifier-name-2"
+  }
+}
+
+
+inputs = merge(
+  local.common_vars.inputs,
+  
+  {
+    classifier1 = [dependency.classifier-name-1.outputs.classifier_name_1]
+    crawler1 = {
+    name = "transformeddata-crawler"
+    description = "Transformed data Glue Crawler"
+    role_arn = dependency.covid-glue-role.outputs.iam_role_arn  
+    
+    catalog_target_tables = [
+        "tfdata_covid",
+        "tfdata_google_trends",
+        "tfdata_fred",
+        "tfdata_meteostat",
+        "tfdata_similar_web",
+        "tfdata_yahoo_finance",
+        "tfdata_moodys",
+        "tfdata_moodys_188",
+        "tfdata_mnemonics",
+        "tfdata_ihs_historical",
+        "tfdata_ihs_pp"
+                    ]
+    }
+},
+  {
+    classifier2 = [dependency.classifier-name-2.outputs.classifier_name_2]
+    crawler2 = {
+    name = "cleaneddata-crawler"
+    description = "Transformed data Glue Crawler"
+    role_arn = dependency.covid-glue-role.outputs.iam_role_arn  
+    
+    catalog_target_tables = [
+        "cldata_covid",
+        "cldata_google_trends",
+        "cldata_fred",
+        "cldata_meteostat",
+        "cldata_similar_web",
+        "cldata_moodys",
+        "cldata_moodys_188",
+        "cldata_yahoo_finance",
+        "cldata_ihs_historical",
+        "cldata_ihs_pp"
+                    ]
+}
+  
+database_name = dependency.database_catalog_table.outputs.database_name
+
+  
+  }
+)

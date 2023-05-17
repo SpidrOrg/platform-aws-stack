@@ -19,12 +19,12 @@ dependency "s3_bucket_id_external_sources" {
   }
 }
 
-# dependency "s3_bucket_id" {
-#   config_path = "../../../../s3/lambdacode//."
-#   mock_outputs = {
-#     s3_bucket_id = "bucket-name"
-#   }
-# }
+dependency "new-pytrends-layer" {
+  config_path = "../../../03-layers/08-new-pytrends"
+  mock_outputs = {
+    id = "arn:aws:lambda:us-east-1:287882505924:layer:demo:14"
+  }
+}
 
 
 dependency "dynamodb_table_id" {

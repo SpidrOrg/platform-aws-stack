@@ -93,7 +93,7 @@ inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
   {
-    function_name                           = "krny-moodys-yearly"
+    function_name                           = "ingestion-moodys-yearly"
     # s3_bucket                               = dependency.s3_bucket_id.outputs.s3_bucket_id
     s3_key                                  = "functions/moodys-yearly/lambda_function.py.zip"
     runtime                                 = "python3.8"

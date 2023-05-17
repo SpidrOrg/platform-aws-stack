@@ -32,7 +32,7 @@
                 "glue:GetJobRun"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:glue:us-east-1:287882505924:job/dev_krny_trnsf_fred_tf",
+            "Resource": "arn:aws:glue:us-east-1:287882505924:job/transformation-fred",
             "Sid": "GlueJobPolicy"
         },
         {

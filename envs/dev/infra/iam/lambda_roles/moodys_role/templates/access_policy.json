@@ -32,7 +32,7 @@
                 "glue:StartJobRun"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:glue:us-east-1:287882505924:job/dev_krny_trnsf_moodys_tf",
+            "Resource": "arn:aws:glue:us-east-1:287882505924:job/transformation-moodys",
             "Sid": "GlueJobPolicy"
         },
         {

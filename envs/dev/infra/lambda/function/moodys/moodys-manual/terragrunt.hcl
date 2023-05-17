@@ -83,7 +83,7 @@ dependency "secret_name" {
 }
 
 dependency "job_name" {
-  config_path = "../../../../glue/jobs/transformation_moodys"
+  config_path = "../../../../glue/jobs/transformation-moodys"
   mock_outputs = {
     glue_job_name  = ["jobname"]
   }

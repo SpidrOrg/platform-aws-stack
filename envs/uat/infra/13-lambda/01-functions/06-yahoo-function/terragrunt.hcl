@@ -40,12 +40,12 @@ dependency "yahoo_iam_roles" {
   }
 }
 
-# dependency "yahoo_layers" {
-#   config_path = "../../layers/dev_yahoo_fin_package"
-#   mock_outputs = {
-#     id = "arn:aws:lambda:us-east-1:287882505924:layer:demo:1"
-#   }
-# }
+dependency "yahoo_fin_layers" {
+  config_path = "../../03-layers/06-yahoo-fin-package"
+  mock_outputs = {
+    id = "arn:aws:lambda:us-east-1:287882505924:layer:demo:14"
+  }
+}
 
 dependency "pvt_subnet" {
   config_path = "../../../01-vpc"
@@ -53,7 +53,6 @@ dependency "pvt_subnet" {
     private_subnets = ["subnet-1234"]
   }
 }
-
 
 dependency "security_group_id" {
   config_path = "../../../02-securitygroup/01-lambda_sg"
@@ -76,7 +75,7 @@ inputs = merge(
     function_name                           = "ingestion-yahoofin"
     s3_key                                  = "functions/yahoo_function/lambda_function.py.zip"
     runtime                                 = "python3.9"
-    layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:yahoo-fin-package-tf:1"]//[dependency.yahoo_layers.outputs.id]
+    layer_arns                              = [dependency.yahoo_fin_layers.outputs.id]//["arn:aws:lambda:us-east-1:396112814485:layer:yahoo-fin-package-tf:1"]
     environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id  , dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id, file_name = "yahoo.csv", file_path = "raw-data/yahoo_finance/" , gluejobname = dependency.job_name.outputs.glue_job_name[0] }
     role_arn                                = dependency.yahoo_iam_roles.outputs.iam_role_arn
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

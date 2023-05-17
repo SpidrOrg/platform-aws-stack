@@ -3,9 +3,9 @@ bucket_name            = "devbucket006"
 force_destroy          = "true"
 attach_policy          = "true"
 deny_insecure          = "true"
-project                = "krny"
+#project                = "krny"
 environment_class      = "dev"
-object_lock            = false
+#object_lock            = false
 lifecycle_rule_enabled = "true"
 lifecycle_rule_prefix  = "log/"
 #------rule-1-----
@@ -22,3 +22,5 @@ ignore_public_acls      = "true"
 restrict_public_buckets = "true"
 owner="devops"
 data_folders_list = ["one/dir1/dir2","two/dir3/dir4"]
+
+# file_names = [  "index.html", "data.py"]

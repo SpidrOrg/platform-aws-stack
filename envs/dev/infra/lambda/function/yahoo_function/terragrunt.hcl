@@ -62,7 +62,7 @@ dependency "security_group_id" {
 }
 
 dependency "job_name" {
-  config_path = "../../../glue/jobs/transformation_yahoofin//."
+  config_path = "../../../glue/jobs/transformation-yahoofin//."
   mock_outputs = {
     glue_job_name  = ["jobname"]
   }

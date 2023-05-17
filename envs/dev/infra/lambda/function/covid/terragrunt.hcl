@@ -55,7 +55,7 @@ dependency "security_group_id" {
 }
 
 dependency "job_name" {
-  config_path = "../../../glue/jobs/transformation_covid//."
+  config_path = "../../../glue/jobs/transformation-covid//."
   mock_outputs = {
     glue_job_name  = ["jobname"]
   }

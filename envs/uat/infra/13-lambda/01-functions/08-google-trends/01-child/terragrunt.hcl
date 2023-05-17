@@ -34,12 +34,12 @@ dependency "dynamodb_table_id" {
   }
 }
 
-# dependency "pytrends_layers" {
-#   config_path = "../../../lambda-layers/layer-pytrends//."
-#   mock_outputs = {
-#     lambda_layer_arn = "layer-1234"
-#   }
-# }
+dependency "pytrends_layers" {
+  config_path = "../../../03-layers/03-pytrends"
+  mock_outputs = {
+    id = "arn:aws:lambda:us-east-1:287882505924:layer:demo:14"
+  }
+}
 
 dependency "google_iam_roles" {
   config_path = "../../../../07-iam/01-lambda_roles/03-google-trends-roles/02-child"
@@ -69,8 +69,8 @@ inputs = merge(
     function_name                           = "ingestion-googletrends-child"
     s3_key                                  = "functions/googletrendschild/lambda_function.py.zip"
     runtime                                 = "python3.7"
-    # layer_arns                              = [dependency.pytrends_layers.outputs.lambda_layer_arn]
-    layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:pytrends-tf:1"]
+    layer_arns                              = [dependency.pytrends_layers.outputs.id]
+    # layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:pytrends-tf:1"]
     role_arn                                = dependency.google_iam_roles.outputs.iam_role_arn
     environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamo_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id, file_path = "raw-data/google_trends1/1900-01-01/" }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

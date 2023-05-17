@@ -33,26 +33,26 @@ dependency "moodys_roles" {
   }
 }
 
-# dependency "yahoo_fin_layers" {
-#   config_path = "../../layers/dev_yahoo_fin_package"
-#   mock_outputs = {
-#     id = "layer-1234"
-#   }
-# }
+dependency "yahoo_fin_layers" {
+  config_path = "../../../03-layers/06-yahoo-fin-package"
+  mock_outputs = {
+    id = "arn:aws:lambda:us-east-1:287882505924:layer:demo:14"
+  }
+}
 
-# dependency "openpyxl_layers" {
-#   config_path = "../../layers/dev_openpyxl"
-#   mock_outputs = {
-#     id = "layer-1234"
-#   }
-# }
+dependency "openpyxl_layers" {
+  config_path = "../../../03-layers/02-openpyxl"
+  mock_outputs = {
+    id = "arn:aws:lambda:us-east-1:287882505924:layer:demo:14"
+  }
+}
 
-# dependency "s3fs_layers" {
-#   config_path = "../../layers/dev_s3fs"
-#   mock_outputs = {
-#     id = "layer-1234"
-#   }
-# }
+dependency "s3fs_layers" {
+  config_path = "../../../03-layers/05-s3fs"
+  mock_outputs = {
+    id = "arn:aws:lambda:us-east-1:287882505924:layer:demo:14"
+  }
+}
 
 dependency "pvt_subnet" {
   config_path = "../../../../01-vpc"
@@ -93,7 +93,7 @@ inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
   {
-    function_name                           = "krny-moodys-monthly"
+    function_name                           = "ingestion-moodys-monthly"
     # s3_bucket                               = dependency.s3_bucket_id.outputs.s3_bucket_id
     s3_key                                  = "functions/moodys-monthly/lambda_function.py.zip"
     runtime                                 = "python3.8"

@@ -82,6 +82,15 @@ dependency "secret_name" {
   }
 }
 
+dependency "job_name" {
+  config_path = "../../../../glue/jobs/transformation-moodys"
+  mock_outputs = {
+    glue_job_name  = ["jobname"]
+  }
+}
+
+
+
 inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
@@ -93,7 +102,7 @@ inputs = merge(
     # layer_arns                              = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
     layer_arns                              = ["arn:aws:lambda:us-east-1:287882505924:layer:request_s3fs_pandas:1"]
     role_arn                                = dependency.moodys_roles.outputs.iam_role_arn
-    environment_variables                   = {secret_name = dependency.secret_name.outputs.secret_name,dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id, bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, date_column =	"quarterly_date", file_name =	"moodys_quarterly.csv", file_path	= "raw-data/moodys_all/data/quarterly/", freq_code	= 172, gluejobname = "dev_krny_trnsf_moodys_tf", mapping_file_name = "moodys_all_mnemonics.csv", mapping_file_path = "raw-data/moodys_all/config/"  }
+    environment_variables                   = {secret_name = dependency.secret_name.outputs.secret_name,dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id, bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, date_column =	"quarterly_date", file_name =	"moodys_quarterly.csv", file_path	= "raw-data/moodys_all/data/quarterly/", freq_code	= 172, gluejobname = dependency.job_name.outputs.glue_job_name[0], mapping_file_name = "moodys_all_mnemonics.csv", mapping_file_path = "raw-data/moodys_all/config/"  }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
     vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })
