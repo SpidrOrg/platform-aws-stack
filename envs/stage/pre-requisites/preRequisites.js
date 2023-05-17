@@ -57,6 +57,7 @@ exec(`aws s3api head-bucket --bucket ${stateFileBucketName}`, (e)=>{
 
       // Clone codebase
       const repoLink = process.env.terraformDependencyGithubURL;
+      console.log("repoLink", repoLink);
       exec(`git clone ${repoLink}`, (err1, output1)=>{
         if (err1){
           console.log("Error in cloning repository");
