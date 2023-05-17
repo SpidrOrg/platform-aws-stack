@@ -5,14 +5,18 @@ env:
 phases:
     install:
         commands:
-            - cd /usr/bin 
+            - cd /usr/bin
             - curl -L -o terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz https://github.com/accurics/terrascan/releases/download/v${TERRASCAN_VERSION}/terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz
             - tar -xf terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz terrascan
     build:
         commands:
             - cd "$CODEBUILD_SRC_DIR"
             - cd envs/stage/pre-requisites
-            - node preRequisites.js
+            - npm ci
+            - npm i -g cdk
+            - cdk bootstrap
+            - cdk deploy --all --require-approval=never --outputs-file ./stackexports.json
+            - node otherSetups.js
             - cd "$CODEBUILD_SRC_DIR"
             - cd envs/stage
             - find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;
