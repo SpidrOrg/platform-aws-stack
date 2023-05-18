@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const accountConfig = require("./accountConfig.json");
 
 // This
 // const indexOfAwsAccountInArnSplit = process.env.CODEBUILD_BUILD_ARN.split(":").indexOf(process.env.AWS_REGION) + 1;
@@ -9,17 +10,15 @@ const path = require("path");
 const awsAccount = "319925118739";
 const awsRegion = "us-east-1";
 
-
-const TERRAFORM_STATEFILE_BUCKET = "319925118739-statefile"; //process.env.TERRAFORM_STATEFILE_BUCKET;
-const TERRAFORM_STATELOCK_DD_TABLE = "tf-statelock"; //process.env.TERRAFORM_STATELOCK_DD_TABLE;
+const TERRAFORM_STATEFILE_BUCKET = process.env.TERRAFORM_STATEFILE_BUCKET;
+const TERRAFORM_STATELOCK_DD_TABLE = process.env.TERRAFORM_STATELOCK_DD_TABLE;
 
 const TOKENS = {
   ":TERRAFORM_STATEFILE_BUCKET:": TERRAFORM_STATEFILE_BUCKET,
   ":TERRAFORM_STATELOCK_DD_TABLE:": TERRAFORM_STATELOCK_DD_TABLE,
-  ":ENV_NAME:": "uat",
-  ":123456789012:": "396112814485"
+  ":ENV_NAME:": accountConfig[awsAccount][awsRegion].envName,
+  ":123456789012:": awsAccount
 }
-
 
 const replaceFilePath = path.join(__dirname, "./envs/stage/terragrunt.hcl");
 let fileContents = fs.readFileSync(replaceFilePath, "utf-8");
