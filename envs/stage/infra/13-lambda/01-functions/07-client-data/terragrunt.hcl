@@ -56,7 +56,7 @@ dependency "security_group_id" {
 dependency "job_name" {
   config_path = "../../../12-glue/jobs/transformation-covid"
   mock_outputs = {
-    glue_job_name  = ["jobname"]
+    glue_job_name = ["jobname"]
   }
 }
 
@@ -74,10 +74,10 @@ inputs = merge(
     description                             = "Lambda Function"
     handler                                 = "index.handler"
     create_current_version_allowed_triggers = true
-    layer_arns                              = [dependency.node18.outputs.id]//["arn:aws:lambda:us-east-1::123456789012::layer:node18-tf:1"]
+    layer_arns                              = [dependency.node18.outputs.id] //["arn:aws:lambda:us-east-1::123456789012::layer:node18-tf:1"]
     role_arn                                = dependency.client_data_iam_roles.outputs.iam_role_arn
-    environment_variables                   = { gluejobname = dependency.job_name.outputs.glue_job_name[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, base_url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/", covidcases_filename = "covidcases.csv", prefix = "raw-data/covid/data/", url = "https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/time_series_covid19_vaccine_us.csv", vaccine_filename = "vaccinedata.csv" }
-    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    # environment_variables                   = { gluejobname = dependency.job_name.outputs.glue_job_name[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, base_url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/", covidcases_filename = "covidcases.csv", prefix = "raw-data/covid/data/", url = "https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/time_series_covid19_vaccine_us.csv", vaccine_filename = "vaccinedata.csv" }
+    # vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
+    # vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
 })
 

@@ -66,13 +66,13 @@ inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
   {
-    function_name                           = "ingestion-googletrends-child"
-    s3_key                                  = "functions/googletrendschild/lambda_function.py.zip"
-    runtime                                 = "python3.7"
-    layer_arns                              = [dependency.pytrends_layers.outputs.id]
+    function_name = "ingestion-googletrends-child"
+    s3_key        = "functions/googletrendschild/lambda_function.py.zip"
+    runtime       = "python3.7"
+    layer_arns    = [dependency.pytrends_layers.outputs.id]
     # layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:pytrends-tf:1"]
-    role_arn                                = dependency.google_iam_roles.outputs.iam_role_arn
-    environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamo_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id, file_path = "raw-data/google_trends1/1900-01-01/" }
-    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    role_arn = dependency.google_iam_roles.outputs.iam_role_arn
+    # environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamo_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id, file_path = "raw-data/google_trends1/1900-01-01/" }
+    # vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
+    # vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
 })

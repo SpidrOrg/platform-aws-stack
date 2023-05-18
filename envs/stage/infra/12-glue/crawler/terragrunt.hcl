@@ -45,13 +45,13 @@ inputs = merge(
   local.common_vars.inputs,
 
   {
-    classifier1 = [dependency.classifier-name-1.outputs.classifier_name_1[0]]
+    classifier1 = [dependency.classifier-name-1.outputs.classifier_name_1]
     crawler1 = {
-    name = "transformeddata-crawler"
-    description = "Transformed data Glue Crawler"
-    role_arn = dependency.covid-glue-role.outputs.iam_role_arn
+      name        = "transformeddata-crawler"
+      description = "Transformed data Glue Crawler"
+      role_arn    = dependency.covid-glue-role.outputs.iam_role_arn
 
-    catalog_target_tables = [
+      catalog_target_tables = [
         "tfdata_covid",
         "tfdata_google_trends",
         "tfdata_fred",
@@ -63,17 +63,17 @@ inputs = merge(
         "tfdata_mnemonics",
         "tfdata_ihs_historical",
         "tfdata_ihs_pp"
-                    ]
+      ]
     }
-},
+  },
   {
-    classifier2 = [dependency.classifier-name-2.outputs.classifier_name_2[0]]
+    classifier2 = [dependency.classifier-name-2.outputs.classifier_name_2]
     crawler2 = {
-    name = "cleaneddata-crawler"
-    description = "Transformed data Glue Crawler"
-    role_arn = dependency.covid-glue-role.outputs.iam_role_arn
+      name        = "cleaneddata-crawler"
+      description = "Transformed data Glue Crawler"
+      role_arn    = dependency.covid-glue-role.outputs.iam_role_arn
 
-    catalog_target_tables = [
+      catalog_target_tables = [
         "cldata_covid",
         "cldata_google_trends",
         "cldata_fred",
@@ -84,10 +84,10 @@ inputs = merge(
         "cldata_yahoo_finance",
         "cldata_ihs_historical",
         "cldata_ihs_pp"
-                    ]
-}
+      ]
+    }
 
-database_name = dependency.database_catalog_table.outputs.database_name
+    database_name = dependency.database_catalog_table.outputs.database_name
 
 
   }

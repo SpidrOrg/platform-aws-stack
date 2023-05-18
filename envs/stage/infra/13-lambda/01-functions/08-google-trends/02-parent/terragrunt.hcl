@@ -64,7 +64,7 @@ dependency "child_arn" {
 dependency "job_name" {
   config_path = "../../../../12-glue/jobs/transformation-google"
   mock_outputs = {
-    glue_job_name  = ["jobname"]
+    glue_job_name = ["jobname"]
   }
 }
 
@@ -72,12 +72,12 @@ inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
   {
-    function_name                           = "ingestion-googletrends-parent"
-    s3_key                                  = "functions/googletrendsparent/lambda_function.py.zip"
-    runtime                                 = "python3.7"
-    layer_arns                              = ["arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python37:4"]
-    role_arn                                = dependency.google_iam_roles.outputs.iam_role_arn
-    environment_variables                   = { gluejobname = dependency.job_name.outputs.glue_job_name[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamo_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id, function_arn = dependency.child_arn.outputs.lambda_function_arn }//"dev_krny_trnsf_google_tf"}//
-    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    function_name = "ingestion-googletrends-parent"
+    s3_key        = "functions/googletrendsparent/lambda_function.py.zip"
+    runtime       = "python3.7"
+    layer_arns    = ["arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python37:4"]
+    role_arn      = dependency.google_iam_roles.outputs.iam_role_arn
+    # environment_variables                   = { gluejobname = dependency.job_name.outputs.glue_job_name[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamo_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id, function_arn = dependency.child_arn.outputs.lambda_function_arn }//"dev_krny_trnsf_google_tf"}//
+    # vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
+    # vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
 })
