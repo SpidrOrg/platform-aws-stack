@@ -14,7 +14,7 @@ locals {
 dependency "glue_transformation_job_role" {
   config_path = "../../../07-iam/02-glue-roles/01-covid"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::123456789012::role/role_name"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/role_name"
   }
 }
 
