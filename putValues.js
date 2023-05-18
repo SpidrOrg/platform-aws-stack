@@ -3,12 +3,12 @@ const path = require("path");
 const accountConfig = require("./accountConfig.json");
 
 // This
-// const indexOfAwsAccountInArnSplit = process.env.CODEBUILD_BUILD_ARN.split(":").indexOf(process.env.AWS_REGION) + 1;
-// const awsAccount = process.env.CODEBUILD_BUILD_ARN.split(":")[indexOfAwsAccountInArnSplit];
-// const awsRegion = process.env.AWS_REGION;
+const indexOfAwsAccountInArnSplit = process.env.CODEBUILD_BUILD_ARN.split(":").indexOf(process.env.AWS_REGION) + 1;
+const awsAccount = process.env.CODEBUILD_BUILD_ARN.split(":")[indexOfAwsAccountInArnSplit];
+const awsRegion = process.env.AWS_REGION;
 // or this//
-const awsAccount = "319925118739";
-const awsRegion = "us-east-1";
+// const awsAccount = "319925118739";
+// const awsRegion = "us-east-1";
 
 const TERRAFORM_STATEFILE_BUCKET = process.env.TERRAFORM_STATEFILE_BUCKET;
 const TERRAFORM_STATELOCK_DD_TABLE = process.env.TERRAFORM_STATELOCK_DD_TABLE;
