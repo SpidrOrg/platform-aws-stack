@@ -18,20 +18,20 @@ dependency "function_arn" {
   }
 }
 
-dependency "function_name" {
-  config_path = "../../../01-functions/04-moodys/02-quarterly"
-  mock_outputs = {
-    function_name = "function_name"
-  }
-}
+# dependency "function_name" {
+#   config_path = "../../../01-functions/04-moodys/02-quarterly"
+#   mock_outputs = {
+#     function_name = "function_name"
+#   }
+# }
 
 inputs = merge(
   local.common_vars.inputs,
   {
-    lambda_function_name        = dependency.function_name.outputs.function_name
-    lambda_function_arn         = dependency.function_arn.outputs.lambda_function_arn
-    event_rule_name             = "moodys_event_rule_quarterly"
-    event_rule_description      = "A rule to trigger my lambda function on a schedule"
-    schedule_expression         = "cron(0 0 5 JAN,APR,JUL,OCT ? *)"
+    lambda_function_name   = "ingestion-moodys-quarterly" //dependency.function_name.outputs.function_name
+    lambda_function_arn    = dependency.function_arn.outputs.lambda_function_arn
+    event_rule_name        = "moodys_event_rule_quarterly"
+    event_rule_description = "A rule to trigger my lambda function on a schedule"
+    schedule_expression    = "cron(0 0 5 JAN,APR,JUL,OCT ? *)"
 })
 
