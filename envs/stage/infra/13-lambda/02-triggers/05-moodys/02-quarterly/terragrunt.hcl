@@ -14,7 +14,7 @@ locals {
 dependency "function_arn" {
   config_path = "../../../01-functions/04-moodys/02-quarterly"
   mock_outputs = {
-    lambda_function_arn = "arn:aws:lambda:us-east-1:287882505924:function:test"
+    function_name = "function-name"
   }
 }
 
