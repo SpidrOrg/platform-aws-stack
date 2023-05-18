@@ -21,7 +21,7 @@
 # dependency "function_name" {
 #   config_path = "../../../01-functions/04-moodys/03-yearly"
 #   mock_outputs = {
-#     function_name = "function-name"
+#     function_name = "function_name"
 #   }
 # }
 

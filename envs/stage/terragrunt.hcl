@@ -2,8 +2,8 @@ remote_state {
   backend = "s3"
   config = {
     encrypt        = true
-    bucket         = ":TERRAFORM_STATEFILE_BUCKET:"
-    dynamodb_table = ":TERRAFORM_STATELOCK_DD_TABLE:"
+    bucket         = "319925118739-statefile"//":TERRAFORM_STATEFILE_BUCKET:"
+    dynamodb_table = "tf-statelock"//":TERRAFORM_STATELOCK_DD_TABLE:"
     key            = "stage/${path_relative_to_include()}/terraform.tfstate"
     region         = "us-east-1"
   }
