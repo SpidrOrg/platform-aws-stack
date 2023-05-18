@@ -14,7 +14,7 @@ locals {
 dependency "covid-glue-role" {
   config_path = "../../07-iam/02-glue-roles/01-covid"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::123456789012:role/role_name"
+    iam_role_arn = "arn:aws:iam::123456789012::role/role_name"
   }
 }
 
@@ -43,14 +43,14 @@ dependency "classifier-name-2" {
 
 inputs = merge(
   local.common_vars.inputs,
-  
+
   {
     classifier1 = [dependency.classifier-name-1.outputs.classifier_name_1[0]]
     crawler1 = {
     name = "transformeddata-crawler"
     description = "Transformed data Glue Crawler"
-    role_arn = dependency.covid-glue-role.outputs.iam_role_arn  
-    
+    role_arn = dependency.covid-glue-role.outputs.iam_role_arn
+
     catalog_target_tables = [
         "tfdata_covid",
         "tfdata_google_trends",
@@ -71,8 +71,8 @@ inputs = merge(
     crawler2 = {
     name = "cleaneddata-crawler"
     description = "Transformed data Glue Crawler"
-    role_arn = dependency.covid-glue-role.outputs.iam_role_arn  
-    
+    role_arn = dependency.covid-glue-role.outputs.iam_role_arn
+
     catalog_target_tables = [
         "cldata_covid",
         "cldata_google_trends",
@@ -86,9 +86,9 @@ inputs = merge(
         "cldata_ihs_pp"
                     ]
 }
-  
+
 database_name = dependency.database_catalog_table.outputs.database_name
 
-  
+
   }
 )

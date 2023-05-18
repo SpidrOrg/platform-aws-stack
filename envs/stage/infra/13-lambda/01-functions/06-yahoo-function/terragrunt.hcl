@@ -36,7 +36,7 @@ dependency "dynamodb_table" {
 dependency "yahoo_iam_roles" {
   config_path = "../../../07-iam/01-lambda_roles/07-yahoo-function-roles"
   mock_outputs = {
-  iam_role_arn = "arn:aws:iam::396112814485:role/terraform"
+  iam_role_arn = "arn:aws:iam:::123456789012::role/terraform"
   }
 }
 
@@ -75,7 +75,7 @@ inputs = merge(
     function_name                           = "ingestion-yahoofin"
     s3_key                                  = "functions/yahoo_function/lambda_function.py.zip"
     runtime                                 = "python3.9"
-    layer_arns                              = [dependency.yahoo_fin_layers.outputs.id]//["arn:aws:lambda:us-east-1:396112814485:layer:yahoo-fin-package-tf:1"]
+    layer_arns                              = [dependency.yahoo_fin_layers.outputs.id]//["arn:aws:lambda:us-east-1::123456789012::layer:yahoo-fin-package-tf:1"]
     environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id  , dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id, file_name = "yahoo.csv", file_path = "raw-data/yahoo_finance/" , gluejobname = dependency.job_name.outputs.glue_job_name[0] }
     role_arn                                = dependency.yahoo_iam_roles.outputs.iam_role_arn
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

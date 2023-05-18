@@ -15,7 +15,7 @@ locals {
 dependency "covid_iam_roles" {
   config_path = "../../../07-iam/01-lambda_roles/01-covid-roles"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::396112814485:role/terraform"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/terraform"
   }
 }
 
@@ -68,7 +68,7 @@ inputs = merge(
     function_name                           = "ingestion-covid"
     s3_key                                  = "functions/covid/lambda_function.py.zip"
     runtime                                 = "python3.9"
-    # layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:yahoo-fin-package-tf:1"]
+    # layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:yahoo-fin-package-tf:1"]
     layer_arns                              = [dependency.yahoo_fin_layers.outputs.id]
     role_arn                                = dependency.covid_iam_roles.outputs.iam_role_arn
     environment_variables                   = { gluejobname = dependency.job_name.outputs.glue_job_name[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, base_url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/", covidcases_filename = "covidcases.csv", prefix = "raw-data/covid/data/", url = "https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/time_series_covid19_vaccine_us.csv", vaccine_filename = "vaccinedata.csv" }

@@ -22,7 +22,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::krny-spi-ext-sources-uat/raw-data/yahoo_finance/*"
+                "arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:/raw-data/yahoo_finance/*"
             ]
         },
         {
@@ -32,7 +32,7 @@
                 "glue:StartJobRun"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:glue:us-east-1:396112814485:job/transformation-yahoofin",
+            "Resource": "arn:aws:glue:us-east-1::123456789012::job/transformation-yahoofin",
             "Sid": "GlueJobPolicy"
         },
         {
@@ -49,7 +49,7 @@
                 "dynamodb:PutItem"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:dynamodb:us-east-1:396112814485:table/yahoofin",
+            "Resource": "arn:aws:dynamodb:us-east-1::123456789012::table/yahoofin",
             "Sid": "SpecificTable"
         },
         {

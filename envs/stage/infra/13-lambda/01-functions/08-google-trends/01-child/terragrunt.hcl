@@ -44,7 +44,7 @@ dependency "pytrends_layers" {
 dependency "google_iam_roles" {
   config_path = "../../../../07-iam/01-lambda_roles/03-google-trends-roles/02-child"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::396112814485:role/terraform"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/terraform"
   }
 }
 
@@ -61,7 +61,7 @@ dependency "pvt_subnet" {
     private_subnets = ["subnet-1234"]
   }
 }
-    
+
 inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
@@ -70,7 +70,7 @@ inputs = merge(
     s3_key                                  = "functions/googletrendschild/lambda_function.py.zip"
     runtime                                 = "python3.7"
     layer_arns                              = [dependency.pytrends_layers.outputs.id]
-    # layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:pytrends-tf:1"]
+    # layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:pytrends-tf:1"]
     role_arn                                = dependency.google_iam_roles.outputs.iam_role_arn
     environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamo_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id, file_path = "raw-data/google_trends1/1900-01-01/" }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

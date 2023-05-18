@@ -29,7 +29,7 @@
                 "lambda:InvokeFunction",
                 "lambda:InvokeAsync"
             ],
-            "Resource": "arn:aws:lambda:us-east-1:396112814485:function:ingestion-googletrends-child"
+            "Resource": "arn:aws:lambda:us-east-1::123456789012::function:ingestion-googletrends-child"
         },
         {
             "Action": [
@@ -38,7 +38,7 @@
                 "glue:GetJobRun"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:glue:us-east-1:396112814485:job/transformation-google",
+            "Resource": "arn:aws:glue:us-east-1::123456789012::job/transformation-google",
             "Sid": "GlueJobPolicy"
         },
         {
@@ -66,7 +66,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:dynamodb:us-east-1:396112814485:table/krny-google-trends"
+                "arn:aws:dynamodb:us-east-1::123456789012::table/krny-google-trends"
             ]
         }
     ]

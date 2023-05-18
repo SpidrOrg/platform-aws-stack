@@ -16,7 +16,7 @@ inputs = merge(
   local.common_vars.inputs,
   {
     region                 = "us-east-1"
-    bucket_name            = "krny-spi-codebase-uat"
+    bucket_name            = "krny-spi-codebase-:ENV_NAME:"
     force_destroy          = "true"
     attach_policy          = "true"
     deny_insecure          = "true"

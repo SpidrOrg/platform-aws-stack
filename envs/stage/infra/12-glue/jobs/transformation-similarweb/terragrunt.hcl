@@ -14,7 +14,7 @@ locals {
 dependency "glue_transformation_job_role" {
   config_path = "../../../07-iam/02-glue-roles/07-similar_web"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::123456789012:role/role_name"
+    iam_role_arn = "arn:aws:iam::123456789012::role/role_name"
   }
 }
 
@@ -41,22 +41,22 @@ inputs = merge(
         max_retries                     = 0
         timeout                         = 2880
         max_concurrent_runs             = 1
-        script_object_key               = "krny-spi-codebase-uat/glue/python-shell-scripts/krny_trnsf_similarweb.py"
+        script_object_key               = "krny-spi-codebase-:ENV_NAME:/glue/python-shell-scripts/krny_trnsf_similarweb.py"
         default_arguments =         {
                                 "--enable-job-insights": "false",
                                 "--job-language": "python",
                                 "--job-type": "pythonshell",
                                 "--max_capacity": 1.0,
-                                "--TempDir": "s3://krny-spi-codebase-uat/glue/python-shell-scripts/temp-dir/",
+                                "--TempDir": "s3://krny-spi-codebase-:ENV_NAME:/glue/python-shell-scripts/temp-dir/",
                                 "--enable-glue-datacatalog": "true",
                                 "--library-set": "analytics",
-                                "--bucket": "krny-spi-ext-sources-uat",
+                                "--bucket": "krny-spi-ext-sources-:ENV_NAME:",
                                 "--crawler_cleaneddata": "cleaneddata-crawler",
                                 "--crawler_transformeddata": "transformeddata-crawler",
                                 "--folder": "raw-data/similar_web"
                                 }
       }
-    ]                        
+    ]
   },
 )
- 
+

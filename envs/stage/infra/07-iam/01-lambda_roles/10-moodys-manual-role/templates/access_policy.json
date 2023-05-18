@@ -20,7 +20,7 @@
 			],
 			"Effect": "Allow",
 			"Resource": [
-				"arn:aws:s3:::krny-spi-ext-sources-uat/raw-data/moodys_188/*"
+				"arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:/raw-data/moodys_188/*"
 			]
 		},
 		{
@@ -29,7 +29,7 @@
 			],
 			"Effect": "Allow",
 			"Resource": [
-				"arn:aws:s3:::krny-spi-ext-sources-uat"
+				"arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:"
 			]
 		},
 		{
@@ -39,7 +39,7 @@
 				"glue:StartJobRun"
 			],
 			"Effect": "Allow",
-			"Resource": "arn:aws:glue:us-east-1:396112814485:job/transformation-moodys-188",
+			"Resource": "arn:aws:glue:us-east-1::123456789012::job/transformation-moodys-188",
 			"Sid": "GlueJobPolicy"
 		}
 	],

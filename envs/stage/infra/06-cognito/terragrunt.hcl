@@ -14,6 +14,6 @@ locals {
 inputs = merge(
   local.common_vars.inputs,
   {
-    name = "krny-terraform-pool-uat"
+    name = "krny-terraform-pool-:ENV_NAME:"
   }
-)  
+)

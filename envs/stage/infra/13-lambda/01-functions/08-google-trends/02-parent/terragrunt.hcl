@@ -36,7 +36,7 @@ dependency "dynamodb_table_id" {
 dependency "google_iam_roles" {
   config_path = "../../../../07-iam/01-lambda_roles/03-google-trends-roles/01-parent"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::396112814485:role/terraform"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/terraform"
   }
 }
 

@@ -21,7 +21,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::krny-spi-ext-sources-uat/raw-data/covid/*"
+                "arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:/raw-data/covid/*"
             ]
         },
         {
@@ -30,7 +30,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::krny-spi-ext-sources-uat"
+                "arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:"
             ]
         },
         {
@@ -40,7 +40,7 @@
                 "glue:StartJobRun"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:glue:us-east-1:396112814485:job/transformation-covid",
+            "Resource": "arn:aws:glue:us-east-1::123456789012::job/transformation-covid",
             "Sid": "GlueJobPolicy"
         }
     ],

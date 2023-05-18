@@ -21,14 +21,14 @@
 # dependency "iam_policy_arn" {
 #   config_path = "../07-iam/04-lakeformation-role/01-lake-main-user/"
 #   mock_outputs = {
-#     iam_policy_arn = "arn:aws:iam::396112814485:policy/policy-name"
+#     iam_policy_arn = "arn:aws:iam:::123456789012::policy/policy-name"
 #   }
 # }
 
 # dependency "iam_user_arn" {
 #   config_path = "../07-iam/05-iam-user/01-lakeformation-user"
 #   mock_outputs = {
-#     iam_user_arn = "arn:aws:iam::396112814485:user/lakeuser"
+#     iam_user_arn = "arn:aws:iam:::123456789012::user/lakeuser"
 #   }
 # }
 
@@ -46,16 +46,16 @@
 #       }
 #     ]
 #     lf_tags = {
-#       env     = ["uat"]
+#       env     = [":ENV_NAME:"]
 #       project = ["krny"]
 #     }
 #     resources = {
 #       database = {
 #         name = "aws_athena"
 #         tags = {
-#           env = "uat"
+#           env = ":ENV_NAME:"
 #         }
 #       }
 #     }
-#     extra_tags = { "ManagedBy" : "Terraform", "Environment" : "UAT", "Account" : "UAT" }
+#     extra_tags = { "ManagedBy" : "Terraform", "Environment" : ":ENV_NAME:", "Account" : ":ENV_NAME:" }
 # })

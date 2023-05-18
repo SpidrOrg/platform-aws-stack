@@ -14,7 +14,7 @@ locals {
 inputs = merge(
   local.common_vars.inputs,
   {
-    alias           = "alias/krny-kms-key-uat"
-    description     = "KMS key for uat-krny"
+    alias           = "alias/krny-kms-key-:ENV_NAME:"
+    description     = "KMS key for :ENV_NAME:-krny"
   }
 )

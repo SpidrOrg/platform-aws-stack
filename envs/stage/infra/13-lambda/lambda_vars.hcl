@@ -6,5 +6,5 @@ inputs = {
     description                             = "Lambda Function"
     handler                                 = "lambda_function.lambda_handler"
     create_current_version_allowed_triggers = true
-    s3_bucket                               = "396112814485-codebase"
+    s3_bucket                               = ":123456789012:-codebase"
 }

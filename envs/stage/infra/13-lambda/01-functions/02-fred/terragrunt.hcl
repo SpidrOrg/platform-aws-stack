@@ -29,7 +29,7 @@ dependency "dynamodb_table_id" {
 dependency "fred_iam_roles" {
   config_path = "../../../07-iam/01-lambda_roles/02-fred-roles"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::396112814485:role/terraform"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/terraform"
   }
 }
 dependency "pvt_subnet" {
@@ -68,7 +68,7 @@ dependency "job_name" {
     glue_job_name  = ["jobname"]
   }
 }
-    
+
 inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
@@ -76,7 +76,7 @@ inputs = merge(
     function_name                           = "ingestion-fred"
     s3_key                                  = "functions/fred/lambda_function.py.zip"
     runtime                                 = "python3.8"
-    layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:request_s3fs_pandas_layers:1"]
+    layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:request_s3fs_pandas_layers:1"]
     role_arn                                = dependency.fred_iam_roles.outputs.iam_role_arn
     environment_variables                   = {  secret = dependency.secret_name.outputs.secret_name, gluejobname = dependency.job_name.outputs.glue_job_name[0], file_path = "raw-data/fred/",bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id , dynamodb_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

@@ -45,13 +45,13 @@
           ],
           "Resource": [
             "arn:aws:s3:::aws-glue-*/*",
-            "arn:aws:s3:::krny-spi-ext-sources-uat/reference-data/transformation/variable-treatment/*",
-            "arn:aws:s3:::krny-spi-ext-sources-uat/cleaned-data/*",
-            "arn:aws:s3:::krny-spi-ext-sources-uat/transformed-data/*",
-            "arn:aws:s3:::krny-spi-codebase-uat/glue/temp-dir/*",
-            "arn:aws:s3:::krny-spi-codebase-uat/glue/python-packages/*",
-            "arn:aws:s3:::krny-spi-codebase-uat/glue/python-shell-scripts/*",
-            "arn:aws:s3:::krny-spi-ext-sources-uat/raw-data/*"
+            "arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:/reference-data/transformation/variable-treatment/*",
+            "arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:/cleaned-data/*",
+            "arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:/transformed-data/*",
+            "arn:aws:s3:::krny-spi-codebase-:ENV_NAME:/glue/temp-dir/*",
+            "arn:aws:s3:::krny-spi-codebase-:ENV_NAME:/glue/python-packages/*",
+            "arn:aws:s3:::krny-spi-codebase-:ENV_NAME:/glue/python-shell-scripts/*",
+            "arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:/raw-data/*"
 
           ]
       },

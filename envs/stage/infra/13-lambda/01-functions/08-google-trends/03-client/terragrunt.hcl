@@ -37,7 +37,7 @@ dependency "dynamodb_table_id" {
 dependency "google_iam_roles" {
   config_path = "../../../../07-iam/01-lambda_roles/03-google-trends-roles/03-client"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::396112814485:role/terraform"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/terraform"
   }
 }
 
@@ -76,9 +76,9 @@ inputs = merge(
     function_name                           = "ingestion-googletrends-client"
     s3_key                                  = "functions/googletrendsclient/lambda_function.py.zip"
     runtime                                 = "python3.8"
-    layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:new_pytrends:1"]
+    layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:new_pytrends:1"]
     role_arn                                = dependency.google_iam_roles.outputs.iam_role_arn
-    environment_variables                   = { dynamodb = dependency.dynamodb_table_id.outputs.dynamodb_table_id, env = "uat", krny_bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id }
+    environment_variables                   = { dynamodb = dependency.dynamodb_table_id.outputs.dynamodb_table_id, env = ":ENV_NAME:", krny_bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
     vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
 })

@@ -29,7 +29,7 @@ dependency "s3_bucket_id_external_sources" {
 dependency "similar_web_roles" {
   config_path = "../../../07-iam/01-lambda_roles/06-similar-role"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::396112814485:role/terraform"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/terraform"
   }
 }
 
@@ -83,7 +83,7 @@ inputs = merge(
     s3_key                                  = "functions/similar_web/lambda_function.py.zip"
     runtime                                 = "python3.9"
     layer_arns                              = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
-    # layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:yahoo-fin-package-tf:1","arn:aws:lambda:us-east-1:396112814485:layer:openpyxl-tf:1","arn:aws:lambda:us-east-1:396112814485:layer:s3fs-tf:1"]
+    # layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:yahoo-fin-package-tf:1","arn:aws:lambda:us-east-1::123456789012::layer:openpyxl-tf:1","arn:aws:lambda:us-east-1::123456789012::layer:s3fs-tf:1"]
     role_arn                                = dependency.similar_web_roles.outputs.iam_role_arn
     environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id , conversion_filename = "conversion_dashboard.csv", conversion_sheet = "Direct", gluejobname = dependency.job_name.outputs.glue_job_name[0], path = "raw-data/similar_web/data/", prefix_conversion = "raw-data/similar_web/manual_upload/raw_conversion_dashboard/", prefix_totaltraffic = "raw-data/similar_web/manual_upload/raw_totaltraffic_sources/", totaltraffic_filename = "totaltraffic_sources.csv" }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

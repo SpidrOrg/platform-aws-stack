@@ -21,7 +21,7 @@ dependency "s3_bucket_id_external_sources" {
 dependency "glue_transformation_job_role" {
   config_path = "../../../07-iam/02-glue-roles/09-meteostat-ingestion"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::123456789012:role/role_name"
+    iam_role_arn = "arn:aws:iam::123456789012::role/role_name"
   }
 }
 
@@ -39,27 +39,27 @@ inputs = merge(
         max_retries                     = 0
         timeout                         = 2880
         max_concurrent_runs             = 1
-        script_object_key               = "krny-spi-codebase-uat/glue/python-shell-scripts/krny-meteostat.py"
+        script_object_key               = "krny-spi-codebase-:ENV_NAME:/glue/python-shell-scripts/krny-meteostat.py"
         default_arguments =         {
                                 "--enable-job-insights": "false",
                                 "--job-language": "python",
                                 "--job-type": "pythonshell",
-                                "--TempDir": "s3://krny-spi-codebase-uat/glue/python-shell-scripts/temp-dir/",
+                                "--TempDir": "s3://krny-spi-codebase-:ENV_NAME:/glue/python-shell-scripts/temp-dir/",
                                 "--enable-glue-datacatalog": "true",
-                                "--extra-py-files": "s3://krny-spi-codebase-uat/glue/python-packages/meteostat-1.6.5-py3-none-any.whl",
+                                "--extra-py-files": "s3://krny-spi-codebase-:ENV_NAME:/glue/python-packages/meteostat-1.6.5-py3-none-any.whl",
                                 "--library-set": "analytics",
-                                "--bucket": "krny-spi-ext-sources-uat",
+                                "--bucket": "krny-spi-ext-sources-:ENV_NAME:",
                                 "--folder": "raw-data/meteostat/data/",
                                 "--file_name": "Meteostat_clean",
                                 "--gluejobname": "transformation-meteostat",
                                 "--crawler_cleaneddata": "cleaneddata-crawler",
                                 "--crawler_transformeddata": "transformeddata-crawler",
-                                "--mapper": "s3://krny-spi-ext-sources-uat/raw-data/meteostat/config/Mappedweatherstation_by_City.csv",         
+                                "--mapper": "s3://krny-spi-ext-sources-:ENV_NAME:/raw-data/meteostat/config/Mappedweatherstation_by_City.csv",
                                 "--dpu": "1"
                                 }
       }
-    ]                        
+    ]
   },
 )
- 
+
 

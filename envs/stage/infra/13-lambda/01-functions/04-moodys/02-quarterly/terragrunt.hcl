@@ -29,7 +29,7 @@ dependency "s3_bucket_id" {
 dependency "moodys_roles" {
   config_path = "../../../../07-iam/01-lambda_roles/05-moodys-role"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::396112814485:role/aws-role"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/aws-role"
   }
 }
 
@@ -98,7 +98,7 @@ inputs = merge(
     s3_key                                  = "functions/moodys-quarterly/lambda_function.py.zip"
     runtime                                 = "python3.8"
     # layer_arns                              = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
-    layer_arns                              = ["arn:aws:lambda:us-east-1:396112814485:layer:request_s3fs_pandas_layers:1"]
+    layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:request_s3fs_pandas_layers:1"]
     role_arn                                = dependency.moodys_roles.outputs.iam_role_arn
     environment_variables                   = {secret_name = dependency.secret_name.outputs.secret_name,dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id, bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, date_column =	"quarterly_date", file_name =	"moodys_quarterly.csv", file_path	= "raw-data/moodys_all/data/quarterly/", freq_code	= 172, gluejobname = dependency.job_name.outputs.glue_job_name[0], mapping_file_name = "moodys_all_mnemonics.csv", mapping_file_path = "raw-data/moodys_all/config/"  }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

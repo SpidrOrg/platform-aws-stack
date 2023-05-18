@@ -14,7 +14,7 @@ locals {
 dependency "client_data_iam_roles" {
   config_path = "../../../07-iam/01-lambda_roles/08-client-data-roles"
   mock_outputs = {
-    iam_role_arn = "arn:aws:iam::396112814485:role/terraform"
+    iam_role_arn = "arn:aws:iam:::123456789012::role/terraform"
   }
 }
 
@@ -64,7 +64,7 @@ inputs = merge(
   local.common_vars.inputs,
   {
     function_name                           = "client-data-transformation"
-    s3_bucket                               = "396112814485-codebase"
+    s3_bucket                               = ":123456789012:-codebase"
     s3_key                                  = "functions/client-data/lambda_function.zip"
     runtime                                 = "nodejs18.x"
     region                                  = "us-east-1"
@@ -74,7 +74,7 @@ inputs = merge(
     description                             = "Lambda Function"
     handler                                 = "index.handler"
     create_current_version_allowed_triggers = true
-    layer_arns                              = [dependency.node18.outputs.id]//["arn:aws:lambda:us-east-1:396112814485:layer:node18-tf:1"]
+    layer_arns                              = [dependency.node18.outputs.id]//["arn:aws:lambda:us-east-1::123456789012::layer:node18-tf:1"]
     role_arn                                = dependency.client_data_iam_roles.outputs.iam_role_arn
     environment_variables                   = { gluejobname = dependency.job_name.outputs.glue_job_name[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, base_url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/", covidcases_filename = "covidcases.csv", prefix = "raw-data/covid/data/", url = "https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/time_series_covid19_vaccine_us.csv", vaccine_filename = "vaccinedata.csv" }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

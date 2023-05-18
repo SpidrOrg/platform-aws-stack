@@ -32,7 +32,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::krny-spi-ext-sources-uat/raw-data/google_trends1/*"
+                "arn:aws:s3:::krny-spi-ext-sources-:ENV_NAME:/raw-data/google_trends1/*"
             ]
         },
         {
@@ -50,7 +50,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:dynamodb:us-east-1:396112814485:table/googletrends"
+                "arn:aws:dynamodb:us-east-1::123456789012::table/googletrends"
             ]
         },
 		{
@@ -60,7 +60,7 @@
                 "glue:GetJobRun"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:glue:us-east-1:396112814485:job/transformation-google",
+            "Resource": "arn:aws:glue:us-east-1::123456789012::job/transformation-google",
             "Sid": "GlueJobPolicy"
         },
         {

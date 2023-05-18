@@ -36,7 +36,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:dynamodb:us-east-1:396112814485:table/krny-google-trends-client"
+                "arn:aws:dynamodb:us-east-1::123456789012::table/krny-google-trends-client"
             ]
         },
         {
