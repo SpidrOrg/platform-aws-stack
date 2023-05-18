@@ -12,6 +12,7 @@ phases:
         commands:
             - cd "$CODEBUILD_SRC_DIR"
             - node putValues.js
+            - cat envs/stage/terragrunt.hcl
             - cd envs/stage
             - find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;
             - terragrunt run-all init --terragrunt-parallelism 1
