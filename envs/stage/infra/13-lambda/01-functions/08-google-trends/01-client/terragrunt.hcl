@@ -55,13 +55,6 @@ dependency "pvt_subnet" {
   }
 }
 
-dependency "child_arn" {
-  config_path = "../01-child"
-  mock_outputs = {
-    lambda_function_arn = "arn:aws:lambda:us-east-1:111122223411:function:name"
-  }
-}
-
 dependency "job_name" {
   config_path = "../../../../12-glue/jobs/transformation-google"
   mock_outputs = {
