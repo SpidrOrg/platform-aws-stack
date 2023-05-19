@@ -15,7 +15,8 @@ inputs = merge(
     local.common_vars.inputs,    
     {
     create_layer        = true
-    filename            = "new-pytrend.zip"
+    s3_bucket           = "699967727511-codebase"
+    s3_key              = "layers/new-pytrend.zip"
     layer_name          = "new-pytrends"
     compatible_runtimes = ["python3.8"]
 })

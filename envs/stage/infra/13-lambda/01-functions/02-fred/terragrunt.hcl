@@ -76,7 +76,7 @@ inputs = merge(
     function_name                           = "ingestion-fred"
     s3_key                                  = "functions/fred/lambda_function.py.zip"
     runtime                                 = "python3.8"
-    layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:request_s3fs_pandas_layers:1"]
+    # layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:request_s3fs_pandas_layers:1"]
     role_arn                                = dependency.fred_iam_roles.outputs.iam_role_arn
     environment_variables                   = {  secret = "krny-sensing-solution-secret", gluejobname = "transformation-fred", file_path = "raw-data/fred/",bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id , dynamodb_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets

@@ -15,7 +15,8 @@ inputs = merge(
     local.common_vars.inputs,    
     {
     create_layer        = true
-    filename            = "yahoo_fin_package.zip"
+    s3_bucket           = "699967727511-codebase"
+    s3_key              = "layers/yahoo_fin_package.zip"
     layer_name          = "yahoo-fin-package"
     compatible_runtimes = ["python3.9"]
 })

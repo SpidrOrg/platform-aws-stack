@@ -15,7 +15,9 @@ inputs = merge(
     local.common_vars.inputs,    
     {
     create_layer        = true
-    filename            = "s3fs.zip"
+    # filename            = "s3fs.zip"
+    s3_bucket           = "699967727511-codebase"
+    s3_key              = "layers/s3fs.zip"
     layer_name          = "s3fs"
     compatible_runtimes = ["python3.9"]
 })

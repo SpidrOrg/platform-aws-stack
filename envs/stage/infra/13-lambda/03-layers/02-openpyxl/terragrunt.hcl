@@ -3,7 +3,7 @@ include {
 }
 
 terraform {
-  source = "../../../../../../_terraform_modules/terraform-aws-krny-lambda-layer//."
+  source = "../../../../../../_terraform_modules/terraform-aws-krny-lambda-layer-v1//."
 }
 
 locals {
@@ -15,7 +15,9 @@ inputs = merge(
     local.common_vars.inputs,    
     {
     create_layer        = true
-    filename            = "openpyxl.zip"
+    # filename            = "openpyxl.zip"
+    s3_bucket           = "699967727511-codebase"
+    s3_key              = "layers/openpyxl.zip"
     layer_name          = "openpyxl"
     compatible_runtimes = ["python3.9"]
 })
