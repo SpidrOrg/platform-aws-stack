@@ -1,7 +1,13 @@
 version: 0.2
+
 env:
   variables:
     TERRASCAN_VERSION: "1.16.0"
+  parameter-store:
+    TERRAFORM_STATEFILE_BUCKET: "terraformStateFileS3Bucket"
+    TERRAFORM_STATELOCK_DD_TABLE: "terraformStateLockDDTable"
+    ENV_NAME: "envName"
+
 phases:
     install:
         commands:
@@ -12,6 +18,9 @@ phases:
         commands:
             - cd "$CODEBUILD_SRC_DIR"
             - node putValues.js
+            - echo $TERRAFORM_STATEFILE_BUCKET
+            - echo $TERRAFORM_STATELOCK_DD_TABLE
+            - echo $ENV_NAME
             - cat envs/stage/terragrunt.hcl
             - cd envs/stage
             - find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;

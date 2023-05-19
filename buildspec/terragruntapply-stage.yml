@@ -1,4 +1,11 @@
 version: 0.2
+
+env:
+    parameter-store:
+        TERRAFORM_STATEFILE_BUCKET: "terraformStateFileS3Bucket"
+        TERRAFORM_STATELOCK_DD_TABLE: "terraformStateLockDDTable"
+        ENV_NAME: "envName"
+
 phases:
     build:
         commands:
