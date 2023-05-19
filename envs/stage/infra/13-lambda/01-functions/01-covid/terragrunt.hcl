@@ -75,5 +75,3 @@ inputs = merge(
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
     vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })
-
-

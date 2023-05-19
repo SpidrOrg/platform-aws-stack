@@ -11,12 +11,12 @@ locals {
   common_vars = read_terragrunt_config(find_in_parent_folders("common_vars.hcl"))
 }
 
-# dependency "function_arn" {
-#   config_path = "../../01-functions/02-fred"
-#   mock_outputs = {
-#     lambda_function_arn = "arn:aws:lambda:us-east-1:111122223333:function:test-2"
-#   }
-# }
+dependency "function_arn" {
+  config_path = "../../01-functions/02-fred"
+  mock_outputs = {
+    lambda_function_arn = "arn:aws:lambda:us-east-1:111122223333:function:test-2"
+  }
+}
 
 # dependency "function_name" {
 #   config_path = "../../01-functions/02-fred"
