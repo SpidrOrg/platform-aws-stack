@@ -29,7 +29,7 @@ inputs = merge(
   local.common_vars.inputs,
   {
     lambda_function_name   = "ingestion-moodys-quarterly" //dependency.function_name.outputs.function_name
-    lambda_function_arn    = dependency.function_arn.outputs.lambda_function_arn
+    lambda_function_arn    = "arn:aws:lambda:us-east-1::123456789012::function:ingestion-moodys-quarterly"//dependency.function_arn.outputs.lambda_function_arn
     event_rule_name        = "moodys_event_rule_quarterly"
     event_rule_description = "A rule to trigger my lambda function on a schedule"
     schedule_expression    = "cron(0 0 5 JAN,APR,JUL,OCT ? *)"

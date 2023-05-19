@@ -11,12 +11,12 @@ locals {
   common_vars = read_terragrunt_config(find_in_parent_folders("common_vars.hcl"))
 }
 
-dependency "function_arn" {
-  config_path = "../../01-functions/06-yahoo-function"
-  mock_outputs = {
-    lambda_function_arn = "arn:aws:lambda:us-east-1:111122223312:function:test-2"
-  }
-}
+# dependency "function_arn" {
+#   config_path = "../../01-functions/06-yahoo-function"
+#   mock_outputs = {
+#     lambda_function_arn = "arn:aws:lambda:us-east-1:111122223312:function:test-2"
+#   }
+# }
 
 # dependency "function_name" {
 #   config_path = "../../01-functions/06-yahoo-function"
@@ -29,7 +29,7 @@ inputs = merge(
   local.common_vars.inputs,
   {
     lambda_function_name   = "ingestion-yahoofin" //dependency.function_name.outputs.function_name
-    lambda_function_arn    = dependency.function_arn.outputs.lambda_function_arn
+    lambda_function_arn    = "arn:aws:lambda:us-east-1::123456789012::function:ingestion-yahoofin"//dependency.function_arn.outputs.lambda_function_arn
     event_rule_name        = "yahoo_event_rule"
     event_rule_description = "A rule to trigger yahoo function on a schedule i.e 30 days"
     schedule_expression    = "rate(30 days)"
