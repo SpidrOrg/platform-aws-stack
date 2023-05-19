@@ -14,7 +14,6 @@ locals {
 inputs = merge(
   local.common_vars.inputs,
   {
-    
     classifier_name_1 = "transformeddata_crawler_classifier"
     allow_single_column_1 = true
     contains_header_1 = "PRESENT"
