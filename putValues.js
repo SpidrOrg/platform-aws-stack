@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const accountConfig = require("./accountConfig.json");
 
 // This
 const indexOfAwsAccountInArnSplit = process.env.CODEBUILD_BUILD_ARN.split(":").indexOf(process.env.AWS_REGION) + 1;
@@ -16,7 +15,7 @@ const TERRAFORM_STATELOCK_DD_TABLE = process.env.TERRAFORM_STATELOCK_DD_TABLE;
 const TOKENS = {
   ":TERRAFORM_STATEFILE_BUCKET:": TERRAFORM_STATEFILE_BUCKET,
   ":TERRAFORM_STATELOCK_DD_TABLE:": TERRAFORM_STATELOCK_DD_TABLE,
-  ":ENV_NAME:": accountConfig[awsAccount][awsRegion].envName,
+  ":ENV_NAME:": process.env.ENV_NAME,
   ":123456789012:": awsAccount
 }
 

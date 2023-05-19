@@ -71,7 +71,7 @@ inputs = merge(
     runtime       = "python3.8"
     layer_arns    = ["arn:aws:lambda:us-east-1::123456789012::layer:new_pytrends:1"]
     role_arn      = dependency.google_iam_roles.outputs.iam_role_arn
-    # environment_variables                   = { dynamodb = dependency.dynamodb_table_id.outputs.dynamodb_table_id, env = ":ENV_NAME:", krny_bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id }
-    # vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    # vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    environment_variables                   = { dynamodb = dependency.dynamodb_table_id.outputs.dynamodb_table_id, env = ":ENV_NAME:", krny_bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id }
+    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
+    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
 })

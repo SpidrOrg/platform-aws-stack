@@ -78,6 +78,6 @@ inputs = merge(
     layer_arns            = [dependency.yahoo_fin_layers.outputs.id] //["arn:aws:lambda:us-east-1::123456789012::layer:yahoo-fin-package-tf:1"]
     environment_variables = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id, file_name = "yahoo.csv", file_path = "raw-data/yahoo_finance/", gluejobname = dependency.job_name.outputs.glue_job_name[0] }
     role_arn                                = dependency.yahoo_iam_roles.outputs.iam_role_arn
-    # vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    # vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
+    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
 })

@@ -86,6 +86,6 @@ inputs = merge(
     # layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:yahoo-fin-package-tf:1","arn:aws:lambda:us-east-1::123456789012::layer:openpyxl-tf:1","arn:aws:lambda:us-east-1::123456789012::layer:s3fs-tf:1"]
     role_arn = dependency.similar_web_roles.outputs.iam_role_arn
     environment_variables                   = { conversion_filename = "conversion_dashboard.csv", conversion_sheet = "Direct", folder = "raw-data/similar_web", path = "raw-data/similar_web/data/", prefix_conversion = "raw-data/similar_web/manual_upload/raw_conversion_dashboard/", prefix_totaltraffic = "raw-data/similar_web/manual_upload/raw_totaltraffic_sources/", totaltraffic_filename = "totaltraffic_sources.csv" }
-    # vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    # vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
+    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
 })
