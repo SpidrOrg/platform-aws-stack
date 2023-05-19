@@ -14,7 +14,7 @@
 # dependency "function_arn" {
 #   config_path = "../../01-functions/03-ihs"
 #   mock_outputs = {
-#     lambda_function_arn = "arn:aws:lambda:us-east-1:1111222233:function:test-2"
+#     lambda_function_arn = "arn:aws:lambda:us-east-1:112233445566:function:test-2"
 #   }
 # }
 
