@@ -55,12 +55,12 @@ dependency "security_group_id" {
 }
 
 
-dependency "secret_name" {
-  config_path = "../../../05-secret-manager/01-krny-sensing-solution/"
-  mock_outputs = {
-    secret_name = ["secret-name"]
-  }
-}
+# dependency "secret_name" {
+#   config_path = "../../../05-secret-manager/01-krny-sensing-solution/"
+#   mock_outputs = {
+#     secret_name = ["secret-name"]
+#   }
+# }
 
 dependency "job_name" {
   config_path = "../../../12-glue/jobs/transformation-fred"
@@ -78,7 +78,7 @@ inputs = merge(
     runtime                                 = "python3.8"
     layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:request_s3fs_pandas_layers:1"]
     role_arn                                = dependency.fred_iam_roles.outputs.iam_role_arn
-    environment_variables                   = {  secret = dependency.secret_name.outputs.secret_name[0], gluejobname = dependency.job_name.outputs.glue_job_name[0], file_path = "raw-data/fred/",bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id , dynamodb_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id }
+    environment_variables                   = {  secret = "krny-sensing-solution-secret", gluejobname = dependency.job_name.outputs.glue_job_name[0], file_path = "raw-data/fred/",bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id , dynamodb_table = dependency.dynamodb_table_id.outputs.dynamodb_table_id }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
     vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })

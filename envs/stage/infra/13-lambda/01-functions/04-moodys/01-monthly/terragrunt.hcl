@@ -75,13 +75,6 @@ dependency "dynamodb_table" {
   }
 }
 
-dependency "secret_name" {
-  config_path = "../../../../05-secret-manager/02-moodys/"
-  mock_outputs = {
-    secret_name = ["secret-name"]
-  }
-}
-
 dependency "job_name" {
   config_path = "../../../../12-glue/jobs/transformation-moodys"
   mock_outputs = {
@@ -100,7 +93,7 @@ inputs = merge(
     # layer_arns                              = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
     layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:request_s3fs_pandas_layers:1"]
     role_arn                                = dependency.moodys_roles.outputs.iam_role_arn
-    environment_variables                   = {secret_name = dependency.secret_name.outputs.secret_name[0],dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, date_column =	"monthly_date", file_name =	"moodys_monthly.csv", file_path	= "raw-data/moodys_all/data/monthly/", freq_code	= 128, gluejobname = dependency.job_name.outputs.glue_job_name[0], mapping_file_name = "moodys_all_mnemonics.csv", mapping_file_path = "raw-data/moodys_all/config/"  }
+    environment_variables                   = {secret_name = "krny-moodys-secret",dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, date_column =	"monthly_date", file_name =	"moodys_monthly.csv", file_path	= "raw-data/moodys_all/data/monthly/", freq_code	= 128, gluejobname = dependency.job_name.outputs.glue_job_name[0], mapping_file_name = "moodys_all_mnemonics.csv", mapping_file_path = "raw-data/moodys_all/config/"  }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
     vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })
