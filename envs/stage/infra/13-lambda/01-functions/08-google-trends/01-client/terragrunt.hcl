@@ -44,7 +44,7 @@ dependency "google_iam_roles" {
 dependency "security_group_id" {
   config_path = "../../../../02-securitygroup/01-lambda_sg"
   mock_outputs = {
-    security_group_id = ["sg-1234"]
+    security_group_id = "sg-1234"
   }
 }
 
@@ -73,5 +73,5 @@ inputs = merge(
     role_arn      = dependency.google_iam_roles.outputs.iam_role_arn
     environment_variables                   = { dynamodb = dependency.dynamodb_table_id.outputs.dynamodb_table_id, env = ":ENV_NAME:", krny_bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })

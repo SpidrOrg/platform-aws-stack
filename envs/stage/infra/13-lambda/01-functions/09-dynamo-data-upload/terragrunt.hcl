@@ -30,7 +30,7 @@ dependency "pvt_subnet" {
 dependency "security_group_id" {
   config_path = "../../../02-securitygroup/01-lambda_sg"
   mock_outputs = {
-    security_group_id = ["sg-1234"]
+    security_group_id = "sg-1234"
   }
 }
 
@@ -45,5 +45,5 @@ inputs = merge(
     role_arn = dependency.load_s3_dynamodb_roles.outputs.iam_role_arn
     environment_variables                   = {  file_name_PP = "Pricing and Purchasing Historical Price-Building Material_v1116", file_name_historical = "IHS_Economic_History_v1116", folder_path_PP = "raw-data/ihs/data/ihs-pp/", folder_path_historical = "raw-data/ihs/data/ihs-historical/", prefix_PP = "raw-data/ihs/manual-upload/ihs-pp/", prefix_historical = "raw-data/ihs/manual-upload/ihs-historical/", gluejobname = "test" }//gluejobname = dependency.job_name.outputs.glue_job_name[0] }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })

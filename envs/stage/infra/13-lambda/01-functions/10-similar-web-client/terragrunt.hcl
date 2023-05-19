@@ -64,7 +64,7 @@ dependency "pvt_subnet" {
 dependency "security_group_id" {
   config_path = "../../../02-securitygroup/01-lambda_sg"
   mock_outputs = {
-    security_group_id = ["sg-1234"]
+    security_group_id = "sg-1234"
   }
 }
 
@@ -87,5 +87,5 @@ inputs = merge(
     role_arn = dependency.similar_web_roles.outputs.iam_role_arn
     environment_variables                   = { conversion_filename = "conversion_dashboard.csv", conversion_sheet = "Direct", folder = "raw-data/similar_web", path = "raw-data/similar_web/data/", prefix_conversion = "raw-data/similar_web/manual_upload/raw_conversion_dashboard/", prefix_totaltraffic = "raw-data/similar_web/manual_upload/raw_totaltraffic_sources/", totaltraffic_filename = "totaltraffic_sources.csv" }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id[0]]
+    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })
