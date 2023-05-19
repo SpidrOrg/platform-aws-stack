@@ -44,5 +44,3 @@ inputs = merge(
     filter_suffix       = ".xlsx"
     events              = ["s3:ObjectCreated:*"]
 })
-
-"krny-spi-ext-sources-:ENV_NAME:"
