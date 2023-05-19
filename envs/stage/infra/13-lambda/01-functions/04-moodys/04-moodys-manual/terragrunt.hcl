@@ -75,25 +75,23 @@ dependency "dynamodb_table" {
   }
 }
 
-
-
-# dependency "job_name" {
-#   config_path = "../../../../12-glue/jobs/transformation-moodys-188"
-#   mock_outputs = {
-#     glue_job_name = ["jobname"]
-#   }
-# }
+dependency "job_name" {
+  config_path = "../../../../12-glue/jobs/transformation-moodys-188"
+  mock_outputs = {
+    glue_job_name = ["jobname"]
+  }
+}
 
 inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
   {
-    function_name         = "ingestion-moodys-188"
-    s3_key                = "functions/moodys-manual/lambda_function.py.zip"
-    runtime               = "python3.9"
-    layer_arns            = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
-    role_arn              = dependency.moodys_roles.outputs.iam_role_arn
-    environment_variables = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, gluejobname = "transformation-moodys-188", file_name_monthly =	"moodys_monthly.csv", file_name_quarterly =	"moodys_quarterly.csv", file_name_yearly	= "moodys_yearly.csv", file_prefix = "raw-data/moodys_188/manual_upload/", folder_path = "raw-data/moodys_188/data/", mapping_file_name	= "moodys_188_mnemonics.csv", mapping_file_path =	"raw-data/moodys_188/config/"}
-    vpc_subnet_ids        = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids= [dependency.security_group_id.outputs.security_group_id]
+    function_name          = "ingestion-moodys-188"
+    s3_key                 = "functions/moodys-manual/lambda_function.py.zip"
+    runtime                = "python3.9"
+    layer_arns             = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
+    role_arn               = dependency.moodys_roles.outputs.iam_role_arn
+    environment_variables  = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, gluejobname = "transformation-moodys-188", file_name_monthly = "moodys_monthly.csv", file_name_quarterly = "moodys_quarterly.csv", file_name_yearly = "moodys_yearly.csv", file_prefix = "raw-data/moodys_188/manual_upload/", folder_path = "raw-data/moodys_188/data/", mapping_file_name = "moodys_188_mnemonics.csv", mapping_file_path = "raw-data/moodys_188/config/" }
+    vpc_subnet_ids         = dependency.pvt_subnet.outputs.private_subnets
+    vpc_security_group_ids = [dependency.security_group_id.outputs.security_group_id]
 })

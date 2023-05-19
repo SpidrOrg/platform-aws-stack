@@ -35,7 +35,7 @@ dependency "s3_bucket_arn" {
 inputs = merge(
   local.common_vars.inputs,
   {
-    lambda_function_arn = dependency.function_arn.outputs.lambda_function_arn
+    lambda_function_arn = "arn:aws:lambda:us-east-1::123456789012::function:ingestion-ihs"
     statement_id        = "IHSAllowExecutionFromS3Bucket"
     s3_bucket_arn       = dependency.s3_bucket_arn.outputs.s3_bucket_arn
     s3_bucket           = dependency.s3_bucket_id.outputs.s3_bucket_id
@@ -44,3 +44,5 @@ inputs = merge(
     filter_suffix       = ".xlsx"
     events              = ["s3:ObjectCreated:*"]
 })
+
+"krny-spi-ext-sources-:ENV_NAME:"

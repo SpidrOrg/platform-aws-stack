@@ -19,13 +19,6 @@ dependency "s3_bucket_id_external_sources" {
   }
 }
 
-# dependency "s3_bucket_id" {
-#   config_path = "../../../s3/lambdacode//."
-#   mock_outputs = {
-#     s3_bucket_id = "bucket-name"
-#   }
-# }
-
 dependency "similar_web_roles" {
   config_path = "../../../07-iam/01-lambda_roles/11-similar-web-client"
   mock_outputs = {
@@ -68,23 +61,23 @@ dependency "security_group_id" {
   }
 }
 
-# dependency "job_name" {
-#   config_path = "../../../12-glue/jobs/transformation-similarweb//."
-#   mock_outputs = {
-#     glue_job_name = ["jobname"]
-#   }
-# }
+dependency "job_name" {
+  config_path = "../../../12-glue/jobs/transformation-similarweb//."
+  mock_outputs = {
+    glue_job_name = ["jobname"]
+  }
+}
 
 inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
   {
-    function_name = "ingestion-similarweb-client"
-    s3_key        = "functions/similar_web/lambda_function.py.zip"
-    runtime       = "python3.9"
-    layer_arns    = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
-    role_arn = dependency.similar_web_roles.outputs.iam_role_arn
-    environment_variables                   = { conversion_filename = "conversion_dashboard.csv", conversion_sheet = "Direct", folder = "raw-data/similar_web", path = "raw-data/similar_web/data/", prefix_conversion = "raw-data/similar_web/manual_upload/raw_conversion_dashboard/", prefix_totaltraffic = "raw-data/similar_web/manual_upload/raw_totaltraffic_sources/", totaltraffic_filename = "totaltraffic_sources.csv" }
-    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
+    function_name          = "ingestion-similarweb-client"
+    s3_key                 = "functions/similar_web/lambda_function.py.zip"
+    runtime                = "python3.9"
+    layer_arns             = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
+    role_arn               = dependency.similar_web_roles.outputs.iam_role_arn
+    environment_variables  = { conversion_filename = "conversion_dashboard.csv", conversion_sheet = "Direct", folder = "raw-data/similar_web", path = "raw-data/similar_web/data/", prefix_conversion = "raw-data/similar_web/manual_upload/raw_conversion_dashboard/", prefix_totaltraffic = "raw-data/similar_web/manual_upload/raw_totaltraffic_sources/", totaltraffic_filename = "totaltraffic_sources.csv" }
+    vpc_subnet_ids         = dependency.pvt_subnet.outputs.private_subnets
+    vpc_security_group_ids = [dependency.security_group_id.outputs.security_group_id]
 })

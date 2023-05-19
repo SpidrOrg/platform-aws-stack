@@ -18,18 +18,11 @@ dependency "function_arn" {
   }
 }
 
-# dependency "function_name" {
-#   config_path = "../../01-functions/02-fred"
-#   mock_outputs = {
-#     function_name = "function_name"
-#   }
-# }
-
 inputs = merge(
   local.common_vars.inputs,
   {
-    lambda_function_name   = "ingestion-fred" //dependency.function_name.outputs.function_name
-    lambda_function_arn    = "arn:aws:lambda:us-east-1::123456789012::function:ingestion-fred"//dependency.function_arn.outputs.lambda_function_arn
+    lambda_function_name   = "ingestion-fred"
+    lambda_function_arn    = "arn:aws:lambda:us-east-1::123456789012::function:ingestion-fred"
     event_rule_name        = "fred-event-rule"
     event_rule_description = "A rule to trigger yahoo function on a schedule i.e 30 days"
     schedule_expression    = "rate(30 days)"

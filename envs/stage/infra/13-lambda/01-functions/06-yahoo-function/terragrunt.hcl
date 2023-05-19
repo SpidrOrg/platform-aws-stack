@@ -19,13 +19,6 @@ dependency "s3_bucket_id_external_sources" {
   }
 }
 
-# dependency "s3_bucket_id" {
-#   config_path = "../../../s3/lambdacode//."
-#   mock_outputs = {
-#     s3_bucket_id = "bucket-name"
-#   }
-# }
-
 dependency "dynamodb_table" {
   config_path = "../../../09-dynamodb/04-yahoo"
   mock_outputs = {
@@ -61,23 +54,23 @@ dependency "security_group_id" {
   }
 }
 
-# dependency "job_name" {
-#   config_path = "../../../12-glue/jobs/transformation-yahoofin"
-#   mock_outputs = {
-#     glue_job_name = ["jobname"]
-#   }
-# }
+dependency "job_name" {
+  config_path = "../../../12-glue/jobs/transformation-yahoofin"
+  mock_outputs = {
+    glue_job_name = ["jobname"]
+  }
+}
 
 inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
   {
-    function_name         = "ingestion-yahoofin"
-    s3_key                = "functions/yahoo_function/lambda_function.py.zip"
-    runtime               = "python3.9"
-    layer_arns            = [dependency.yahoo_fin_layers.outputs.id] //["arn:aws:lambda:us-east-1::123456789012::layer:yahoo-fin-package-tf:1"]
-    environment_variables = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id, file_name = "yahoo.csv", file_path = "raw-data/yahoo_finance/", gluejobname = "transformation-yahoofin" }
-    role_arn                                = dependency.yahoo_iam_roles.outputs.iam_role_arn
-    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
+    function_name          = "ingestion-yahoofin"
+    s3_key                 = "functions/yahoo_function/lambda_function.py.zip"
+    runtime                = "python3.9"
+    layer_arns             = [dependency.yahoo_fin_layers.outputs.id]
+    environment_variables  = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id, file_name = "yahoo.csv", file_path = "raw-data/yahoo_finance/", gluejobname = "transformation-yahoofin" }
+    role_arn               = dependency.yahoo_iam_roles.outputs.iam_role_arn
+    vpc_subnet_ids         = dependency.pvt_subnet.outputs.private_subnets
+    vpc_security_group_ids = [dependency.security_group_id.outputs.security_group_id]
 })

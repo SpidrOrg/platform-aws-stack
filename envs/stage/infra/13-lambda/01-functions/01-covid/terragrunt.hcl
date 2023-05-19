@@ -33,13 +33,6 @@ dependency "yahoo_fin_layers" {
   }
 }
 
-# dependency "s3_bucket_id" {
-#   config_path = "../../../s3/lambdacode//."
-#   mock_outputs = {
-#     s3_bucket_id = "bucket-name"
-#   }
-# }
-
 dependency "s3_bucket_id_external_sources" {
   config_path = "../../../08-s3/01-externalsources"
   mock_outputs = {
@@ -54,24 +47,23 @@ dependency "security_group_id" {
   }
 }
 
-# dependency "job_name" {
-#   config_path = "../../../12-glue/jobs/transformation-covid"
-#   mock_outputs = {
-#     glue_job_name  = ["jobname"]
-#   }
-# }
+dependency "job_name" {
+  config_path = "../../../12-glue/jobs/transformation-covid"
+  mock_outputs = {
+    glue_job_name = ["jobname"]
+  }
+}
 
 inputs = merge(
   local.common_vars.inputs,
   local.lambda_vars.inputs,
   {
-    function_name                           = "ingestion-covid"
-    s3_key                                  = "functions/covid/lambda_function.py.zip"
-    runtime                                 = "python3.9"
-    # layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:yahoo-fin-package-tf:1"]
-    layer_arns                              = [dependency.yahoo_fin_layers.outputs.id]
-    role_arn                                = dependency.covid_iam_roles.outputs.iam_role_arn
-    environment_variables                   = { gluejobname = "transformation-covid", bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, base_url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/", covidcases_filename = "covidcases.csv", prefix = "raw-data/covid/data/", url = "https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/time_series_covid19_vaccine_us.csv", vaccine_filename = "vaccinedata.csv" }
-    vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
-    vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
+    function_name          = "ingestion-covid"
+    s3_key                 = "functions/covid/lambda_function.py.zip"
+    runtime                = "python3.9"
+    layer_arns             = [dependency.yahoo_fin_layers.outputs.id]
+    role_arn               = dependency.covid_iam_roles.outputs.iam_role_arn
+    environment_variables  = { gluejobname = "transformation-covid", bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, base_url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/", covidcases_filename = "covidcases.csv", prefix = "raw-data/covid/data/", url = "https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/time_series_covid19_vaccine_us.csv", vaccine_filename = "vaccinedata.csv" }
+    vpc_subnet_ids         = dependency.pvt_subnet.outputs.private_subnets
+    vpc_security_group_ids = [dependency.security_group_id.outputs.security_group_id]
 })
