@@ -68,12 +68,12 @@ dependency "security_group_id" {
   }
 }
 
-dependency "job_name" {
-  config_path = "../../../12-glue/jobs/transformation-similarweb//."
-  mock_outputs = {
-    glue_job_name = ["jobname"]
-  }
-}
+# dependency "job_name" {
+#   config_path = "../../../12-glue/jobs/transformation-similarweb//."
+#   mock_outputs = {
+#     glue_job_name = ["jobname"]
+#   }
+# }
 
 inputs = merge(
   local.common_vars.inputs,

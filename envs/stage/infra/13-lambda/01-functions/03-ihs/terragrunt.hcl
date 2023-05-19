@@ -71,12 +71,12 @@ dependency "security_group_id" {
 }
 
 
-dependency "job_name" {
-  config_path = "../../../12-glue/jobs/transformation-ihs"
-  mock_outputs = {
-    glue_job_name  = ["jobname"]
-  }
-}
+# dependency "job_name" {
+#   config_path = "../../../12-glue/jobs/transformation-ihs"
+#   mock_outputs = {
+#     glue_job_name  = ["jobname"]
+#   }
+# }
 
 inputs = merge(
   local.common_vars.inputs,
@@ -88,7 +88,7 @@ inputs = merge(
     layer_arns                              = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
     # layer_arns                              = ["arn:aws:lambda:us-east-1::123456789012::layer:yahoo-fin-package-tf:1","arn:aws:lambda:us-east-1::123456789012::layer:openpyxl-tf:1","arn:aws:lambda:us-east-1::123456789012::layer:s3fs-tf:1"]
     role_arn                                = dependency.ihs_roles.outputs.iam_role_arn
-    environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id , file_name_PP = "Pricing and Purchasing Historical Price-Building Material_v1116", file_name_historical = "IHS_Economic_History_v1116", folder_path_PP = "raw-data/ihs/data/ihs-pp/", folder_path_historical = "raw-data/ihs/data/ihs-historical/", prefix_PP = "raw-data/ihs/manual-upload/ihs-pp/", prefix_historical = "raw-data/ihs/manual-upload/ihs-historical/", gluejobname = dependency.job_name.outputs.glue_job_name[0] }//gluejobname = dependency.job_name.outputs.glue_job_name[0] }
+    environment_variables                   = { bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id , file_name_PP = "Pricing and Purchasing Historical Price-Building Material_v1116", file_name_historical = "IHS_Economic_History_v1116", folder_path_PP = "raw-data/ihs/data/ihs-pp/", folder_path_historical = "raw-data/ihs/data/ihs-historical/", prefix_PP = "raw-data/ihs/manual-upload/ihs-pp/", prefix_historical = "raw-data/ihs/manual-upload/ihs-historical/", gluejobname = "transformation-ihs" }//gluejobname = dependency.job_name.outputs.glue_job_name[0] }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
     vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })

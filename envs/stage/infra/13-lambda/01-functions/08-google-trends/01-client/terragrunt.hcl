@@ -55,12 +55,12 @@ dependency "pvt_subnet" {
   }
 }
 
-dependency "job_name" {
-  config_path = "../../../../12-glue/jobs/transformation-google"
-  mock_outputs = {
-    glue_job_name = ["jobname"]
-  }
-}
+# dependency "job_name" {
+#   config_path = "../../../../12-glue/jobs/transformation-google"
+#   mock_outputs = {
+#     glue_job_name = ["jobname"]
+#   }
+# }
 
 inputs = merge(
   local.common_vars.inputs,
