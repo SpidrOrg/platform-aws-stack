@@ -45,7 +45,7 @@ inputs = merge(
   local.common_vars.inputs,
 
   {
-    classifier1 = "transformeddata_crawler_classifier"//[dependency.classifier-name-1.outputs.classifier_name_1[0]]
+    classifier1 = ["transformeddata_crawler_classifier"]//[dependency.classifier-name-1.outputs.classifier_name_1[0]]
     crawler1 = {
       name        = "transformeddata-crawler"
       description = "Transformed data Glue Crawler"
@@ -67,7 +67,7 @@ inputs = merge(
     }
   },
   {
-    classifier2 = "cleaneddata_crawler_classifier"//[dependency.classifier-name-2.outputs.classifier_name_2[0]]
+    classifier2 = ["cleaneddata_crawler_classifier"]//[dependency.classifier-name-2.outputs.classifier_name_2[0]]
     crawler2 = {
       name        = "cleaneddata-crawler"
       description = "Transformed data Glue Crawler"
