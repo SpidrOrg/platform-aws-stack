@@ -15,10 +15,12 @@ const TERRAFORM_STATELOCK_DD_TABLE = process.env.TERRAFORM_STATELOCK_DD_TABLE;
 const TOKENS = {
   ":TERRAFORM_STATEFILE_BUCKET:": TERRAFORM_STATEFILE_BUCKET,
   ":TERRAFORM_STATELOCK_DD_TABLE:": TERRAFORM_STATELOCK_DD_TABLE,
-  ":ENV_NAME:": process.env.ENV_NAME,
+  ":ENV_NAME:": "prod",
+  ":ENVIRONMENT123123:": process.env.ENV_NAME,
   ":123456789012:": awsAccount
 }
 
+console.log(TOKENS)
 const replaceFilePath = path.join(__dirname, "./envs/stage/terragrunt.hcl");
 let fileContents = fs.readFileSync(replaceFilePath, "utf-8");
 Object.keys(TOKENS).forEach(token=>{
