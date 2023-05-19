@@ -49,7 +49,7 @@ inputs = merge(
     sagemaker_domain_subnet_ids = dependency.pvt_subnet.outputs.private_subnets
     sagemaker_domain_default_user_settings = {
       execution_role  = dependency.sagemaker_roles.outputs.iam_role_arn //"arn:aws:iam::287882505924:role/service-role/AmazonSageMaker-ExecutionRole-20230209T094668"
-      security_groups = [dependency.security_group_id.outputs.security_group_id[0]]
+      security_groups = [dependency.security_group_id.outputs.security_group_id]
     }
   }
 )
