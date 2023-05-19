@@ -68,12 +68,12 @@ dependency "security_group_id" {
   }
 }
 
-dependency "dynamodb_table" {
-  config_path = "../../../../09-dynamodb/05-moodys"
-  mock_outputs = {
-    dynamodb_table_id = ["db-name"]
-  }
-}
+# dependency "dynamodb_table" {
+#   config_path = "../../../../09-dynamodb/05-moodys"
+#   mock_outputs = {
+#     dynamodb_table_id = "db-name"
+#   }
+# }
 
 dependency "secret_name" {
   config_path = "../../../../05-secret-manager/02-moodys/"
@@ -100,7 +100,7 @@ inputs = merge(
     # layer_arns                              = [dependency.yahoo_fin_layers.outputs.id, dependency.openpyxl_layers.outputs.id, dependency.s3fs_layers.outputs.id]
     layer_arns = ["arn:aws:lambda:us-east-1::123456789012::layer:request_s3fs_pandas_layers:1"]
     role_arn   = dependency.moodys_roles.outputs.iam_role_arn
-    environment_variables                   = {secret_name = "krny-moodys-secret",dynamodb_table = dependency.dynamodb_table.outputs.dynamodb_table_id[0], bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, date_column =	"yearly_date", file_name =	"moodys_yearly.csv", file_path	= "raw-data/moodys_all/data/yearly/", freq_code	= 204, gluejobname = "transformation-moodys", mapping_file_name = "moodys_all_mnemonics.csv", mapping_file_path = "raw-data/moodys_all/config/"  }
+    environment_variables                   = {secret_name = "krny-moodys-secret",dynamodb_table = "krny-moodys", bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id, date_column =	"yearly_date", file_name =	"moodys_yearly.csv", file_path	= "raw-data/moodys_all/data/yearly/", freq_code	= 204, gluejobname = "transformation-moodys", mapping_file_name = "moodys_all_mnemonics.csv", mapping_file_path = "raw-data/moodys_all/config/"  }
     vpc_subnet_ids                          = dependency.pvt_subnet.outputs.private_subnets
     vpc_security_group_ids                  = [dependency.security_group_id.outputs.security_group_id]
 })
