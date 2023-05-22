@@ -12,10 +12,8 @@ locals {
 }
 
 inputs = merge(
-    local.common_vars.inputs,    
-    {
-    create_layer        = true
-    # filename            = "openpyxl.zip"
+  local.common_vars.inputs,
+  {
     s3_bucket           = "699967727511-codebase"
     s3_key              = "layers/openpyxl.zip"
     layer_name          = "openpyxl"

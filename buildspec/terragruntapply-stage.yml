@@ -15,4 +15,4 @@ phases:
         - echo $TERRAFORM_STATELOCK_DD_TABLE
         - echo $ENV_NAME
         - cd envs/stage
-        - terragrunt run-all destroy --terragrunt-non-interactive      
+        - terragrunt run-all apply --terragrunt-non-interactive      

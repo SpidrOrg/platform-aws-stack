@@ -15,7 +15,6 @@ provider "aws" {
 # }
 
 resource "aws_lambda_layer_version" "this" {
-  # filename            = var.filename
   s3_bucket           = var.s3_bucket
   s3_key              = var.s3_key
   layer_name          = var.layer_name
