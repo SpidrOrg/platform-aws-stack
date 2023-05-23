@@ -9,12 +9,7 @@ provider "aws" {
 }
 
 
-# resource "local_file" "values" {
-#   filename = "${path.module}/values.txt"
-#   content  = "Sample content"
-# }
-
-resource "aws_lambda_layer_version" "this" {
+resource "aws_lambda_layer_version" "lambda_layer" {
   s3_bucket           = var.s3_bucket
   s3_key              = var.s3_key
   layer_name          = var.layer_name

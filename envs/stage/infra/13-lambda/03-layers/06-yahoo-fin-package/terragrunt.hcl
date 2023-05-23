@@ -3,7 +3,7 @@ include {
 }
 
 terraform {
-  source = "../../../../../../_terraform_modules/terraform-aws-krny-lambda-layer//."
+  source = "../../../../../../_terraform_modules/terraform-aws-krny-lambda-layer-v1//."
 }
 
 locals {
