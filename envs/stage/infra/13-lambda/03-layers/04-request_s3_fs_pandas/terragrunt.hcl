@@ -14,7 +14,7 @@ locals {
 inputs = merge(
   local.common_vars.inputs,
   {
-    s3_bucket           = "699967727511-codebase"
+    s3_bucket           = ":123456789012:-codebase"
     s3_key              = "layers/request_s3_fs_pandas.zip"
     layer_name          = "request_s3_fs_pandas"
     compatible_runtimes = ["python3.8"]

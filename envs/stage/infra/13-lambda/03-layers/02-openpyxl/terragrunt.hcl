@@ -14,7 +14,7 @@ locals {
 inputs = merge(
   local.common_vars.inputs,
   {
-    s3_bucket           = "699967727511-codebase"
+    s3_bucket           = ":123456789012:-codebase"
     s3_key              = "layers/openpyxl.zip"
     layer_name          = "openpyxl"
     compatible_runtimes = ["python3.9"]
