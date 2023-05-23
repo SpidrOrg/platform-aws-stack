@@ -16,6 +16,6 @@ inputs = merge(
   {
     s3_bucket           = "699967727511-codebase"
     s3_key              = "layers/new-pytrend.zip"
-    layer_name          = "new-pytrends"
+    layer_name          = "new-pytrend"
     compatible_runtimes = ["python3.8"]
 })
