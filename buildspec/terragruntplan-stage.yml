@@ -27,4 +27,4 @@ phases:
             - terragrunt run-all init --terragrunt-parallelism 1 --terragrunt-non-interactive
             # - terragrunt run-all validate --terragrunt-parallelism 1
             # - terrascan init
-            - terragrunt run-all destroy --terragrunt-parallelism 1 --terragrunt-non-interactive
+            - terragrunt run-all plan --terragrunt-parallelism 1 --terragrunt-non-interactive
