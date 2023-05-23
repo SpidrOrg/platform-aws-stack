@@ -69,7 +69,7 @@ inputs = merge(
     function_name          = "ingestion-googletrends-client"
     s3_key                 = "functions/googletrendsclient/lambda_function.py.zip"
     runtime                = "python3.8"
-    layer_arns             = ["arn:aws:lambda:us-east-1::123456789012::layer:new_pytrend:1"]
+    layer_arns             = [dependency.new-pytrends-layer.outputs.id] //["arn:aws:lambda:us-east-1::123456789012::layer:new_pytrend:1"]
     role_arn               = dependency.google_iam_roles.outputs.iam_role_arn
     environment_variables  = { dynamodb = dependency.dynamodb_table_id.outputs.dynamodb_table_id, env = ":ENV_NAME:", krny_bucket = dependency.s3_bucket_id_external_sources.outputs.s3_bucket_id }
     vpc_subnet_ids         = dependency.pvt_subnet.outputs.private_subnets
