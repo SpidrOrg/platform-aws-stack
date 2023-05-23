@@ -25,7 +25,7 @@ resource "aws_glue_crawler" "crawler1" {
   lifecycle {
     ignore_changes = [configuration]
   }
-  
+
 
 }
 
@@ -37,7 +37,7 @@ resource "aws_glue_crawler" "crawler2" {
   name          = var.crawler2.name
   description   = var.crawler2.description
   role          = var.crawler2.role_arn
-  classifiers    = var.classifier2
+  classifiers   = var.classifier2
 
   catalog_target {
     database_name = var.database_name
