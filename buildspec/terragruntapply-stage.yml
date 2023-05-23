@@ -14,5 +14,6 @@ phases:
         - echo $TERRAFORM_STATEFILE_BUCKET
         - echo $TERRAFORM_STATELOCK_DD_TABLE
         - echo $ENV_NAME
+        - cat envs/stage/terragrunt.hcl
         - cd envs/stage
         - terragrunt run-all apply --terragrunt-non-interactive      
