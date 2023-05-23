@@ -16,4 +16,4 @@ phases:
         - echo $ENV_NAME
         - cat envs/stage/terragrunt.hcl
         - cd envs/stage
-        - terragrunt run-all apply --terragrunt-non-interactive      
+        - find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;
