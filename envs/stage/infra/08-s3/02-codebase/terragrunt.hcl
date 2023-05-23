@@ -15,23 +15,23 @@ locals {
 inputs = merge(
   local.common_vars.inputs,
   {
-    region                 = "us-east-1"
-    bucket_name            = "krny-spi-codebase-:ENV_NAME:"
-    force_destroy          = "true"
-    attach_policy          = "true"
-    deny_insecure          = "true"
+    region        = "us-east-1"
+    bucket_name   = "krny-spi-:123456789012:-codebase-:ENV_NAME:"
+    force_destroy = "true"
+    attach_policy = "true"
+    deny_insecure = "true"
     # project                = "krny"
     # environment_class      = "dev"
     object_lock            = "false"
     lifecycle_rule_enabled = "false"
     lifecycle_rule_prefix  = "log/"
-    versioning = "true"
+    versioning             = "true"
     #------rule-1-----
     current_transition = [
-    {
+      {
         days          = "30"
         storage_class = "GLACIER"
-    }
+      }
     ]
     expiration_days         = "90"
     block_public_acls       = "true"
@@ -39,5 +39,5 @@ inputs = merge(
     ignore_public_acls      = "true"
     restrict_public_buckets = "true"
     # owner="devops"
-    data_folders_list = ["functions/covid/","functions/fred/","functions/google_trends/","functions/ihs/","functions/moodys/","functions/similar_web/","functions/yahoo_function/","glue/python-shell-scripts","glue/python-shell-scripts/temp-dir/","glue/python-packages/","dashboards"]
-  })
+    data_folders_list = ["functions/covid/", "functions/fred/", "functions/google_trends/", "functions/ihs/", "functions/moodys/", "functions/similar_web/", "functions/yahoo_function/", "glue/python-shell-scripts", "glue/python-shell-scripts/temp-dir/", "glue/python-packages/", "dashboards"]
+})
