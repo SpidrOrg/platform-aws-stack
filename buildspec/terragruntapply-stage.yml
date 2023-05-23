@@ -10,6 +10,7 @@ phases:
     build:
         commands:
         - cd "$CODEBUILD_SRC_DIR"
+        - aws sts get-caller-identity
         - node putValues.js
         - echo $TERRAFORM_STATEFILE_BUCKET
         - echo $TERRAFORM_STATELOCK_DD_TABLE
