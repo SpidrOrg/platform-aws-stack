@@ -17,14 +17,14 @@ phases:
     build:
         commands:
             - cd "$CODEBUILD_SRC_DIR"
-            # - node putValues.js
-            # - echo $TERRAFORM_STATEFILE_BUCKET
-            # - echo $TERRAFORM_STATELOCK_DD_TABLE
-            # - echo $ENV_NAME
-            # - cat envs/stage/terragrunt.hcl
-            # - cd envs/stage
-            # - find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;
-            # - terragrunt run-all init --terragrunt-parallelism 1 --terragrunt-non-interactive
-            # - terragrunt run-all validate --terragrunt-parallelism 1
-            # - terrascan init
-            # - terragrunt run-all plan --terragrunt-parallelism 1 --terragrunt-non-interactive
+            - node putValues.js
+            - echo $TERRAFORM_STATEFILE_BUCKET
+            - echo $TERRAFORM_STATELOCK_DD_TABLE
+            - echo $ENV_NAME
+            - cat envs/stage/terragrunt.hcl
+            - cd envs/stage
+            - find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;
+            - terragrunt run-all init --terragrunt-parallelism 1 --terragrunt-non-interactive
+            - terragrunt run-all validate --terragrunt-parallelism 1
+            - terrascan init
+            - terragrunt run-all plan --terragrunt-parallelism 1 --terragrunt-non-interactive
