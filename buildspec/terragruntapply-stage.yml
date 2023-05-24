@@ -18,4 +18,4 @@ phases:
         - cat envs/stage/terragrunt.hcl
         - cd envs/stage
         - find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;
-        - terragrunt run-all destroy --terragrunt-parallelism 1 --terragrunt-non-interactive      
+        - terragrunt run-all apply --terragrunt-parallelism 1 --terragrunt-non-interactive      
