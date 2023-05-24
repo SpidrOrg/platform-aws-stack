@@ -21,7 +21,7 @@ dependency "vpc_id" {
 dependency "vpc_private_route_table" {
   config_path = "../01-vpc"
   mock_outputs = {
-    vpc_private_route_table = "rtb-09b4216a15daca679"
+    vpc_private_route_table = ["rtb-09b4216a15daca679"]
   }
 }
 
