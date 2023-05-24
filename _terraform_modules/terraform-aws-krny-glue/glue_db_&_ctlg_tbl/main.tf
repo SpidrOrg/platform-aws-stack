@@ -40,10 +40,3 @@ resource "aws_glue_catalog_table" "main" {
     ignore_changes = [parameters, storage_descriptor, owner]
   }
 }
-
-resource "aws_db_cmd" "web" {
-  provisioner "local-exec" {
-    command = "pwd && ls && aws lakeformation grant-permissions --cli-input-json file://test.json"
-  }
-}
-
