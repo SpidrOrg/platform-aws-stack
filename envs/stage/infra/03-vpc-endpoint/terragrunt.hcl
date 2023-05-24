@@ -21,14 +21,14 @@ dependency "vpc_id" {
 dependency "vpc_private_route_table" {
   config_path = "../01-vpc"
   mock_outputs = {
-    vpc_private_route_table = ["rtb-09b4216a15daca679"]
+    vpc_private_route_table = "rtb-09b4216a15daca679"
   }
 }
 
 inputs = merge(
   local.common_vars.inputs,
   {
-    vpc_id     = dependency.vpc_id.outputs.vpc_id
+    vpc_id         = dependency.vpc_id.outputs.vpc_id
     route_table_id = dependency.vpc_private_route_table.outputs.vpc_private_route_table[0]
     endpoints = [
       {
@@ -46,4 +46,4 @@ inputs = merge(
         }
       }
     ]
-  })
+})

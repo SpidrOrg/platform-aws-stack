@@ -42,5 +42,5 @@ variable "timeouts" {
 variable "route_table_id" {
   description = "The ID of the route table to associate with the S3 Gateway endpoint"
   type        = string
-  default     =  ""
+  default     = ""
 }
